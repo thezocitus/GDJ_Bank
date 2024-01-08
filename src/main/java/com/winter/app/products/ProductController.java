@@ -30,7 +30,7 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		List<ProductDTO> ar =this.productDAO.getList();
 		mv.addObject("list", ar);
-		mv.setViewName("product/list");
+		mv.setViewName("products/list");
 		
 		return mv;
 	 
