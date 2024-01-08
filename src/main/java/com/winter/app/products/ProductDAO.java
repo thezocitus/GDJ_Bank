@@ -19,16 +19,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Repository
 public class ProductDAO {
 	
-	private ProductDTO pD;
+//	private ProductDTO pD;
 	
 	@Autowired
 	private SqlSession sqlSession;
 	private final String namespace="com.winter.app.products.ProductDAO.";
 	
 	
-	public ProductDAO() {
-		this.pD = new ProductDTO();
-	}
+//	public ProductDAO() {
+//		this.pD = new ProductDTO();
+//	}
 
 	//상품목록
 	//URL METHOD, PRAMITTER

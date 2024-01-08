@@ -8,9 +8,9 @@
  
  <!-- List  -->
  
- <select id="getList" resultType="ProductDto">
+ <select id="getList" resultType="ProductDTO">
  
- 	SELECT * FROM PRODUCTS
+ 	SELECT * FROM PRODUCT
  	
  </select>
  

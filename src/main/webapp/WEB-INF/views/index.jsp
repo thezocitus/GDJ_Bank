@@ -41,8 +41,8 @@
 			</div>
     	</section>
     </div>
-     <c:import url="./temps/bootStrap_css.jsp"></c:import>
-    
+ 
+ <c:import url="./temps/bootStrap_css.jsp"></c:import>  
   	
 	
   </body>

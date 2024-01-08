@@ -13,7 +13,7 @@
 <head>
 <c:import url="../temps/header.jsp"></c:import>
 <meta charset="UTF-8">
-<title>Product</title>
+<title>Products</title>
 
 </head>
 <body>

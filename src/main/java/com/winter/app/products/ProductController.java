@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/product/*")
+@RequestMapping(value = "/products/*")
 public class ProductController {
 
 	private ProductDAO productDAO;
@@ -26,8 +26,8 @@ public class ProductController {
 		//parameter:
 				
 	@RequestMapping(value= "list", method=RequestMethod.GET)
-	public ModelAndView getList(ModelAndView mv) throws Exception {
-		
+	public ModelAndView getList() throws Exception {
+		ModelAndView mv = new ModelAndView();
 		List<ProductDTO> ar =this.productDAO.getList();
 		mv.addObject("list", ar);
 		mv.setViewName("product/list");
