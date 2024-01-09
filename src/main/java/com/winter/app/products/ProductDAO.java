@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.winter.app.util.Pager;
 
 
 
@@ -23,7 +23,7 @@ public class ProductDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private final String namespace="com.winter.app.products.ProductDAO.";
+	private final String NAMESPACE="com.winter.app.products.ProductDAO.";
 	
 	
 //	public ProductDAO() {
@@ -35,12 +35,23 @@ public class ProductDAO {
 	//URL: /product/list
 	//method : get
 	//parameter:
-			
-	public List<ProductDTO> getList() throws Exception {
+	public int add(ProductDTO productDTO) throws Exception{
 		
-		return sqlSession.selectList(namespace+"getList");
+		return sqlSession.insert(NAMESPACE+"add", productDTO);
 		
 	}
+	
+	
+	public List<ProductDTO> getList(Pager pager) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+"getList", pager);
+		
+	}
+	
+	public Long getTotal() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotal");
+	}
+	
 	
 	//디테일
 	//URL: /product/list

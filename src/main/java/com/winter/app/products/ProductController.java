@@ -4,36 +4,28 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-@RequestMapping(value = "/products/*")
-public class ProductController {
+import com.winter.app.util.Pager;
 
-	private ProductDAO productDAO;
-	public ProductController() {
-		this.productDAO = new ProductDAO();
-	}
+@Controller
+@RequestMapping("/products/*")
+public class ProductController {
 	
-	//상품목록
-		//URL METHOD, PRAMITTER
-		//URL: /product/list
-		//method : get
-		//parameter:
-				
-	@RequestMapping(value= "list", method=RequestMethod.GET)
-	public ModelAndView getList() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		List<ProductDTO> ar =this.productDAO.getList();
-		mv.addObject("list", ar);
-		mv.setViewName("products/list");
-		
-		return mv;
-	 
+	@Autowired
+	private ProductService productService;
+	
+	
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public void getList(Pager pager, Model model) throws Exception{
+		 List<ProductDTO> ar = productService.getList(pager);
+		 model.addAttribute("list",ar);	 
+		 
 	}
 	
 						

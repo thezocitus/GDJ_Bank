@@ -6,13 +6,29 @@
  <mapper namespace="com.winter.app.products.ProductDAO">
  
  
+ <insert id="add"  parameterType="ProductDTO"> 
+ 	INSERT INTO PRODUCT
+ 	VALUES (#{productNum}, 
+ 			#{productName},
+ 			#{productContents},
+ 			#{productRate},
+ 			#{productJumsu})
+ </insert>
+ 
+ 
  <!-- List  -->
  
- <select id="getList" resultType="ProductDTO">
+ <select id="getList" resultType="ProductDTO"  parameterType="Pager">
  
- 	SELECT * FROM PRODUCT
- 	
+ 	SELECT  * FROM 
+	(SELECT ROWNUM R, P.* FROM 
+	(SELECT * FROM PRODUCT ORDER BY PRODUCTNUM DESC) P)
+	 WHERE R BETWEEN #{startRow} AND #{lastRow}
+	 	
  </select>
  
+ <select id="getTotal" resultType="long">
+ 	SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+ </select>
  
  </mapper>

@@ -27,10 +27,10 @@
 		          </ul>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="/products/list">products</a>
+		          <a class="nav-link" href="products/list">Products</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="/departments/list">Departments</a>
+		          <a class="nav-link" href="/departments/list"></a>
 		        </li>
 		      </ul>
 		      <form class="d-flex" role="search">
@@ -40,5 +40,5 @@
 		    </div>
 		  </div>
 		</nav>
-	
+		
  </header>
