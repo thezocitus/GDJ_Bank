@@ -41,6 +41,12 @@ public class ProductDAO {
 		
 	}
 	
+	public int addFile(ProductFileDTO productFileDTO){
+		
+		return sqlSession.insert(NAMESPACE+"addFile", productFileDTO);
+		
+	}
+	
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		

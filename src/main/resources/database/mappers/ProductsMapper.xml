@@ -7,6 +7,10 @@
  
  
  <insert id="add"  parameterType="ProductDTO"> 
+ 	<selectKey keyProperty="productNum" order="BEFORE" resultType="Long"> 	
+ 	SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL	
+ </selectKey>
+ 	
  	INSERT INTO PRODUCT
  	VALUES (#{productNum}, 
  			#{productName},
@@ -14,6 +18,17 @@
  			#{productRate},
  			#{productJumsu})
  </insert>
+ 
+ 
+ <insert id="addFile" parameterType="ProductFileDTO">
+ 
+	INSERT INTO PRODUCTFILE 
+	VALUES (PRODUCTFILE_SEQ.NEXTVAL,#{fileName},#{origName},#{productNum})
+ 
+ 
+ </insert>
+ 
+ 
  
  
  <!-- List  -->

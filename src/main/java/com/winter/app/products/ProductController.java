@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.winter.app.util.Pager;
@@ -20,6 +21,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Pager pager, Model model) throws Exception{
@@ -28,6 +30,32 @@ public class ProductController {
 		 
 	}
 	
+	@RequestMapping(value = "add")
+	public String add() {
+		
+		return "products/add";
+	}
+	
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String add(ProductDTO productDTO, Model model, MultipartFile photo)  throws Exception {
+		
+		System.out.println(photo+"photo");
+		
+		int result = this.productService.add(productDTO, photo);
+		
+		String msg="등록 실패";
+		if(result > 0) {
+			msg="등록 성공";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("path","./list");
+		
+		
+		return "commons/result";
+		
+		
+	}
 						
 	//디테일
 	//URL: /product/detail

@@ -15,7 +15,7 @@ public class Pager {
 	
 	// 이전, 다음 블럭 유무
 	private boolean start;
-	private boolean last;
+	private boolean last; 
 	
 	
 	
@@ -41,8 +41,8 @@ public class Pager {
 		Long perBlock = 5L;
 		Long totalBlock = 0L;
 		
-		totalBlock = totalPage/totalBlock;
-		if(totalPage%totalBlock>0) {
+		totalBlock = totalPage/perBlock;
+		if(totalPage%perBlock>0) {
 			totalBlock++;
 		}
 				
@@ -70,7 +70,9 @@ public class Pager {
 		}
 		if(curBlock==totalBlock) {
 			this.setLast(true);
-		}
+			this.setLastNum(totalPage);
+		}		 
+		
 		
 	}
 	
@@ -124,7 +126,8 @@ public class Pager {
 		return lastNum;
 	}
 
-	public void setLastNum(Long lastNum) {
+	public void setLastNum(Long lastNum) {		
+		
 		this.lastNum = lastNum;
 	}
 

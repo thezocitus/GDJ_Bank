@@ -1,8 +1,5 @@
-<%@page import="java.util.List"%>
-<%@page import="com.winter.app.products.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8"%>    
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>    
 <%
  System.out.println("LIST");
@@ -48,8 +45,9 @@
 				      </a>
 				    </li>
 			    </c:if>
-		   <c:forEach begin="${pager.startNum}" end="${lastNum}">
-		    <li class="page-item"><a class="page-link" href="./list?page=${i}">"i"</a></li>
+			    
+		   <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+		    <li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
 		   </c:forEach>
 		   
 		   
@@ -64,7 +62,7 @@
 		</nav>	
 	</div>
 	
-	
+	<a href="add" class="btn btn-outline-primary" role="button">ADD</a>
 	<c:import url="../temps/bootStrap_js.jsp"></c:import>
 </body>
 </html>

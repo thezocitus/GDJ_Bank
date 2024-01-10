@@ -6,9 +6,9 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.winter.app.products.ProductDTO" alias="ProductDTO"/>
+  		<typeAlias type="com.winter.app.products.ProductFileDTO" alias="ProductFileDTO"/>
   		<typeAlias type="com.winter.app.util.Pager" alias="Pager"/>
-  		
-  	
+  		<typeAlias type="java.lang.Long" alias="Long"/>
   	</typeAliases>
   
   </configuration>

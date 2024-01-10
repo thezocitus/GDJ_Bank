@@ -18,15 +18,13 @@ public class ProductDAOTest extends MyTest {
 		int result = 0;
 		for(int i = 0; i < 100 ; i++) {
 			productDTO.setProductNum(100L+i);
-			productDTO.setProductName("hell");
-			productDTO.setProductContents("EHVEN");
+			productDTO.setProductName("hell"+i*3);
+			productDTO.setProductContents("EHVEN"+i*6);
 			productDTO.setProductRate(2.0);
 			productDTO.setProductJumsu(5.0);
-
-			System.out.println(productDTO.getProductNum());
+		
 	
-			result= productDAO.add(productDTO);
-			System.out.println(result);
+			result= productDAO.add(productDTO);			
 		}
 			
 	}
