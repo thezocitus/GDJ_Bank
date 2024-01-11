@@ -36,12 +36,23 @@ public class ProductController {
 		return "products/add";
 	}
 	
+	@RequestMapping(value = "detail")
+	public String getDetail(ProductDTO productDTO, Model model){
+		
+		productDTO = productService.detail(productDTO);
+		
+		model.addAttribute("DTO",productDTO);
+		
+		return "products/detail";
+	}
+	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(ProductDTO productDTO, Model model, MultipartFile photo)  throws Exception {
+	public String add(ProductDTO productDTO, Model model, MultipartFile[] photo)  throws Exception {
 		
 		System.out.println(photo+"photo");
 		
 		int result = this.productService.add(productDTO, photo);
+		
 		
 		String msg="등록 실패";
 		if(result > 0) {

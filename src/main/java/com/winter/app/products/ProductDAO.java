@@ -47,6 +47,9 @@ public class ProductDAO {
 		
 	}
 	
+	public ProductDTO getDetail(ProductDTO productDTO) {
+		return sqlSession.selectOne(NAMESPACE+"getDetail", productDTO);
+	}
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		
@@ -54,9 +57,16 @@ public class ProductDAO {
 		
 	}
 	
+	public List<ProductFileDTO> getFileList(ProductDTO productDTO) throws Exception{
+		
+		return sqlSession.selectList(NAMESPACE+"getFileList", productDTO);
+	}
+	
 	public Long getTotal() throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotal");
 	}
+	
+	
 	
 	
 	//디테일
@@ -89,9 +99,10 @@ public class ProductDAO {
 	//parameter: productNum
 	
 	
-	public int doAdd(ProductDTO productDTO) {
+	public int delect(ProductDTO productDTO) {
+				
+		return sqlSession.delete(NAMESPACE+"delete", productDTO);
 		
-		return 0;
 	}
 
 		
@@ -102,10 +113,6 @@ public class ProductDAO {
 	}
 	
 	
-	public int doDelect(ProductDTO productDTO) {
-	
-		return 0;
-		
-	}
+
 	
 }
