@@ -1,0 +1,112 @@
+1.초기 설정
+
+	A.poem.xml에 의존성 주입.
+
+		자바 버전 1.11 
+	
+		test junit 4.12 확인
+	
+		Spring Test 추가(스프링프레임웍과 동일한 버전)${org.springframework-version}
+	
+		mybatis 관련 4개 추가
+			-mybatis
+			-mybatis-spring
+			-spring-jdbc(스프링프레임웍과 동일한 버전)${org.springframework-version}
+			-ojdbc10
+
+		 APACH COMMONS-FILEUPLOAD 추가
+
+	B.MyBatis 설정 -- 폴더명은 알아서
+		/resources/config
+			-MyBatisConfig.xml
+		/resources/mappers
+			-SampleMapper.xml
+		/resources/database.properties 생성
+			ex)	=====================================================
+					# 주석
+					# 키=벨류
+					#my
+					oracle.username=user02
+					oracle.password=user02
+					oracle.url=jdbc:oracle:thin:@52.78.239.145:1521:xe
+					oracle.driver=oracle.jdbc.driver.OracleDriver
+				=====================================================
+				
+	C.web.xml 
+		수정 *
+		<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+			<context-param>
+				<param-name>contextConfigLocation</param-name>
+				<param-value>/WEB-INF/spring/*-context.xml</param-value>
+			</context-param>
+		추가
+			<!-- Encoding 설정  -->
+				<filter>
+					<filter-name>encode</filter-name>
+					<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+					<init-param>
+						<param-name>encoding</param-name>
+						<param-value>UTF-8</param-value>
+					</init-param>
+				</filter>
+				
+				<filter-mapping>
+					<filter-name>encode</filter-name>
+					<url-pattern>/</url-pattern>
+				</filter-mapping>
+		
+	D.test case 추가
+		<!-- 테스트 케이스. file:src/main/webapp/WEB-INF/spring/**/*-context.xm 이게 중요-->			
+			@RunWith(SpringJUnit4ClassRunner.class)
+			@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xm}"})
+			
+			public class MyTest {
+			
+				
+			
+			}
+	E. root-context 항목 추가
+		<!-- file upload 관련 객체 생성 -->
+			<!-- 여러개의 조각들을 하나로 합치는 역할 -->
+			<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+				<property name="defaultEncoding" value="UTF-8"></property>
+				<!-- 총 파일의 크기 제한 : 단위 Byte -->
+				<property name="maxUploadSize" value="10485760"></property>
+				<!-- 파일당 크기 제한 : 단위 Byte -->
+				<property name="maxUploadSizePerFile" value="2097152"></property>
+			</bean>
+		
+	 DB 접속 정보 입력및 초기설정
+	 
+					<?xml version="1.0" encoding="UTF-8"?>
+					<beans xmlns="http://www.springframework.org/schema/beans"
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xmlns:context="http://www.springframework.org/schema/context"
+						xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+				
+					<context:property-placeholder location="classpath:database/config/database.properties"/>
+					
+				
+					<!-- DB에 로그인 후 연결 객체 -->
+					<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+						<property name="username" value="${oracle.username}"></property>
+						<property name="password" value="${oracle.password}"></property>
+						<property name="url" value="${oracle.url}"></property>
+						<property name="driverClassName" value="${oracle.driver}"></property>
+					</bean>
+					
+					<!-- Connection, sql문이 있는 xml파일의 위치, config 파일의 위치를 알려줌 -->
+					<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+						<property name="dataSource" ref="dataSource"></property>
+						<property name="configLocation" value="classpath:database/config/MyBatisConfig.xml"></property>
+						<property name="mapperLocations" value="classpath:database/mappers/*Mapper.xml"></property>
+					</bean>
+					
+					<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+						<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
+					</bean>
+
+
+		
