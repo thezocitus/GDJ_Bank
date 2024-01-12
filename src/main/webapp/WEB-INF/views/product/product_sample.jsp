@@ -6,14 +6,14 @@
     <head>
     <meta charset="UTF-8">
     <!-- 사용전 경로 수정 -->
-   <c:import url="temps/head_css.jsp"></c:import> 
+   <c:import url="../temps/head_css.jsp"></c:import> 
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <c:import url="temps/header.jsp"></c:import>
+            <c:import url="../temps/header.jsp"></c:import>
  
         </main> 
-        <c:import url="temps/footer.jsp"></c:import>
+        <c:import url="../temps/footer.jsp"></c:import>
     </body>
 </html>

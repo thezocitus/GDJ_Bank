@@ -111,4 +111,13 @@
 					</bean>
 
 
-		 -->
+	2. App 설정
+	
+		데이터의 이동경로(파라미터 )
+		
+		JSP -> Controller -> servece -> DAO(Data Access Object) -> mapper(SQl to Sever) 	
+
+		jsp 생성후 해당 Controller 설정.  
+		(직접 jsp에 접속 되지 안고 controller에서 개발자가 만든 내부 주소로 연동해 보안을 도모하기 위함.)
+		
+		Annotation @Controller, @Requstmapping() 해당 url 입력시 작동.
