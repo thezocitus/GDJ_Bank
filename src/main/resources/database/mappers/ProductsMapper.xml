@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.winter.app.products.ProductDAO">
+ 
+ <!-- Delete -->
+ <delete id="delete" parameterType="ProductDTO">
+ 
+ DELETE PRODUCT WHERE PRODUCTNUM = #{productNum}
+ 
+ </delete>
+ 
+ 
+ <select id="getDetail" resultMap="getDetailRseult" parameterType="ProductDTO">
+	SELECT *
+	FROM PRODUCT 
+	LEFT JOIN PRODUCTFILE 
+	USING (PRODUCTNUM)
+	WHERE PRODUCTNUM = #{productNum}
+ 
+ </select>
+ <resultMap type="ProductDTO" id="getDetailRseult">
+ 	
+ 	<id column="PRODUCTNUM" property="productNum"/>
+ 	<result column="PRODUCTNAME" property="productName"/>
+ 	<result column="PRODUCTCONTENTS" property="productContents"/>
+ 	<result column="PRODUCTRATE" property="productRate"/>
+ 	<result column="PRODUCTJUMSU" property="productJumsu"/>
+ 	
+ 	<collection property="productFileDTOs" javaType="List" ofType="ProductFileDTO">
+ 		
+ 	<id column="FILENUM" property="fileNum"/>
+ 	<result column="FILENAME" property="fileName"/>
+ 	<result column="ORIGNAME" property="origNum"/> 		
+ 
+ 	</collection>
+ 	
+ 
+ 
+ </resultMap>
+ 
+ 
+ <insert id="add"  parameterType="ProductDTO"> 
+ 	<selectKey keyProperty="productNum" order="BEFORE" resultType="Long"> 	
+ 	SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL	
+ </selectKey>
+ 	
+ 	INSERT INTO PRODUCT(PRODUCTNUM,PRODUCTNAME,PRODUCTCONTENTS,PRODUCTRATE,PRODUCTJUMSU)
+ 	VALUES (#{productNum}, 
+ 			#{productName},
+ 			#{productContents},
+ 			#{productRate},
+ 			#{productJumsu})
+ </insert>
+ 
+ 
+ <insert id="addFile" parameterType="ProductFileDTO">
+ 
+	INSERT INTO PRODUCTFILE(FILENUM,PRODUCTNUM,FILENAME,ORIGNAME)
+	VALUES (PRODUCTFILE_SEQ.NEXTVAL,#{productNum},#{fileName},#{origName})
+ 
+ 
+ </insert>
+ 
+ 
+ 
+ 
+ <!-- List  -->
+ 
+ <select id="getList" resultType="ProductDTO"  parameterType="Pager">
+ 
+ 	SELECT  * FROM 
+	(SELECT ROWNUM R, P.* FROM 
+	(SELECT * FROM PRODUCT ORDER BY PRODUCTNUM DESC) P)
+	 WHERE R BETWEEN #{startRow} AND #{lastRow}
+	 	
+ </select>
+ 
+ <select id="getFileList" resultType="ProductFileDTO" parameterType="ProductDTO">
+ 	
+ 	SELECT *FROM PRODUCTFILE WHERE PRODUCTNUM = #{productNum}
+ 	
+ </select>
+ 
+ 
+ <select id="getTotal" resultType="long">
+ 	SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+ </select>
+ 
+ 
+ 
+ </mapper>

@@ -28,39 +28,34 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">                             
-                                <form id="addForm" action="add" method="post" enctype="multipart/foam-data">
+                                <form id="addForm" action="./add" method="post" enctype="multipart/foam-data">
                                     <!-- 상품명 input-->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="productName" name="productName" type="text" placeholder="상품명을 입력하세요" />
                                         <label for="productName">상품명</label>
                                         <div class="invalid-feedback" data-sb-feedback="productName:required">A name is required.</div>
                                     </div>                                  
-                                  
+                                                                  
+                                    <!-- Message input-->
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="productContent" name="productContent" type="text" placeholder="상품 상세 설명" style="height: 10rem"></textarea>
+                                        <label for="productContent">상품 상세</label>
+                                        <div class="invalid-feedback" data-sb-feedback="productContent:required">A message is required.</div>
+                                    </div>
                                        <!-- 이자율  input-->
                                    <div class="form-floating mb-3">
                                         <input class="form-control" id="rate" name="productRate" type="text" placeholder="이자율" />
                                         <label for="rate">이자율</label>
                                         <div class="invalid-feedback" data-sb-feedback="rate:required">A name is required.</div>
-                                    </div> 
-                                     <!-- 점수  input-->
-                                   <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="productJumsu" type="text" placeholder="이자율" />
-                                        <label for="rate">점수</label>
-                                        <div class="invalid-feedback" data-sb-feedback="productJumsu:required">A name is required.</div>
-                                    </div>                                 
-                                    <!-- detail input-->
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="productContents" name="productContents" type="text" placeholder="상품 상세 설명" style="height: 10rem"></textarea>
-                                        <label for="productContents">상품 상세</label>
-                                        <div class="invalid-feedback" data-sb-feedback="productContents:required">A message is required.</div>
-                                    </div>  
+                                    </div>   
                                         <!-- 이자율  input-->
                                   	 <div class="form-floating mb-3">
                                         <input class="form-control" name="attach" type="file"/>
                                         <input class="form-control" name="attach" type="file"/>
                                         <input class="form-control" name="attach" type="file"/>
                                         <input class="form-control" name="attach" type="file"/>
-                                        <input class="form-control" name="attach" type="file"/>                                                                           
+                                        <input class="form-control" name="attach" type="file"/>
+                                        <label for="rate">이자율</label>                                        
                                     </div>  
                                     
                                     <!-- Submit success message-->
@@ -81,7 +76,7 @@
                                     <!-- an error submitting the form-->
                                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                                     <!-- Submit Button-->
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
+                                    <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
                                 </form>
                             </div>
                         </div>
