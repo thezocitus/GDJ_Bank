@@ -1,0 +1,19 @@
+REF  : 질문글 갑글간의 그룹으로 구성
+		원본글 : 자기자신의 NUM겂이 REF값
+		답글   : 부모글의 REF값
+STEP : 그룹내에서 순서
+		원본글 : 0
+		답글   :
+				a.부모의  REF와 같고 STEP의 부모의 STEP보다 큰것들을 찾아서 1씩 증가.
+				b.부모글희 STEP 값에 +1
+DEPTH: JSP 출력시  듥여쓰기 횟수
+		원본글 : 0
+		답글   : 부모의  Depth + 1 한값
+
+num	  title           REF
+1		t1
+2		t2
+3		--> T1.1
+4       --> t1.1.1
+
+SELELT * FROM BOARD WHERE REF DESC, STEP ASC;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -21,8 +22,8 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
-	@Autowired	
-	private ServletContext servletContext;
+//	@Autowired
+//	private ServletContext servletContext;
 	
 
 	

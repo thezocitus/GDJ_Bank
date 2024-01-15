@@ -5,17 +5,22 @@ import java.sql.Date;
 public class BoardDTO {
 	
 	private Long boardNum;
-	private String boardName;	
+	private String boardName;
 	private String boardWriter;
 	private String boardContents;
 	private Date boardDate;
-	private Long boardCount;
+	private Long boardHit;
+	
+	
+	
+	
 	public Long getBoardNum() {
 		return boardNum;
 	}
 	public void setBoardNum(Long boardNum) {
 		this.boardNum = boardNum;
-	}
+	}	
+	
 	public String getBoardName() {
 		return boardName;
 	}
@@ -40,13 +45,13 @@ public class BoardDTO {
 	public void setBoardDate(Date boardDate) {
 		this.boardDate = boardDate;
 	}
-	public Long getBoardCount() {
-		return boardCount;
+	public Long getBoardHit() {
+		return boardHit;
 	}
-	public void setBoardCount(Long boardCount) {
-		this.boardCount = boardCount;
+	public void setBoardHit(Long boardHit) {
+		this.boardHit = boardHit;
 	}
-	 
+	
 	
 	
 	
