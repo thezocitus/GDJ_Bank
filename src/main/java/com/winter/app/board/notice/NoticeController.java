@@ -49,9 +49,7 @@ public class NoticeController {
 		
 		
 		boardDTO = boardService.getDetail(boardDTO);
-		model.addAttribute("boardDTO",boardDTO);
-		
-		System.out.println(model);
+		model.addAttribute("boardDTO",boardDTO);		
 		
 		return "board/update";
 	}
@@ -67,9 +65,8 @@ public class NoticeController {
 		
 	//DELETE
 	@PostMapping("delete")
-	public String setDelete(BoardDTO boardDTO) throws Exception{
+	public String setDelete(BoardDTO boardDTO) throws Exception{	
 		
-		System.out.println(boardDTO.getBoardNum());
 		
 		int result = boardService.setDelete(boardDTO);
 		

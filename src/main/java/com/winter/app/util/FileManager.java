@@ -30,9 +30,8 @@ public class FileManager {
 		if(!f.exists()) {
 			f.mkdirs();
 		}
-		System.out.println(file);
 		
-		
+				
 				
 		String fileName=UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
 		System.out.println(fileName+" : FileManager fliesave");

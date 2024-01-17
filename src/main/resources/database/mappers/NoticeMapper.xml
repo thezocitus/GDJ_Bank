@@ -62,9 +62,11 @@
  	
  	
  	
- 	<select id="getTotalCount" resultType="Long">
+ 	<select id="getTotalCount" resultType="Long" parameterType="Pager">
  		
- 		SELECT COUNT(BOARDNUM) FROM NOTICE
+ 		SELECT COUNT(BOARDNUM) FROM NOTICE 		
+ 		<include refid="search"/>
+ 		
  		
  	</select>
  	

@@ -47,7 +47,7 @@ public class NoticeService implements BoardService{
 	
 	
 	
-	
+	//detail
 	
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
