@@ -12,6 +12,13 @@
  
  </delete>
  
+ <delete id="setFileDelete" parameterType="BoardFileDTO">
+ 
+ DELETE NOTICEFILE WHERE BOARDNUM = #{boardNum}
+ 
+ </delete>
+ 
+ 
  
  <select id="getDetail" resultMap="getDetailRseult" parameterType="ProductDTO">
 	SELECT *

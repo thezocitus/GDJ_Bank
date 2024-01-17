@@ -20,7 +20,7 @@ public class NoticeDAOTest extends MyTest{
 	
 	@Test
 	public void test() throws Exception {
-		this.getListTest();	
+		this.setAddTest();	
 	}
 	
 	
@@ -35,4 +35,27 @@ public class NoticeDAOTest extends MyTest{
 		
 	}
 
+	public void setAddTest() throws Exception {
+		
+	
+		for(int i = 0; i<30; i++) {
+			BoardDTO boardDTO = new BoardDTO();
+			boardDTO.setBoardName("Tommy :"+ i*3);
+			boardDTO.setBoardWriter("nullpoint Eception :" + i*7);
+			boardDTO.setBoardContents("null"+i*i*i*i*i*i*i*50);
+			 noticeDAO.setAdd(boardDTO);
+		}
+		
+		Pager pager = new Pager();
+		pager.makeRow();
+		
+		List<BoardDTO> ar = noticeDAO.getList(pager);
+		
+		assertNotEquals(5,ar.size());
+		
+		
+		
+		
+	}
+	
 }

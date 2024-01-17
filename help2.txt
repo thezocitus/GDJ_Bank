@@ -1,0 +1,10 @@
+ㅣ동기식
+
+//foward 
+
+요청 -> controller -> MV -> JSP : 처음 요청한 URL
+
+
+//redirect
+
+요청 -> controller -> MV -> 응답 : URL이 변경

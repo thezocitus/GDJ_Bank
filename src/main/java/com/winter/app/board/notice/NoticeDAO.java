@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.winter.app.board.BoardDAO;
 import com.winter.app.board.BoardDTO;
+import com.winter.app.board.BoardFileDTO;
 import com.winter.app.util.Pager;
 
 @Repository("na")
@@ -18,12 +19,16 @@ public class NoticeDAO implements BoardDAO{
 	private final String NAMESPACE = "com.winter.app.board.notice.NoticeDAO.";
 	
 
-	
+	public List<BoardFileDTO> getFileList(BoardDTO boardDTO){
+		
+		return sqlSession.selectList(NAMESPACE+"getFileList", boardDTO);
+		
+	}
 
 	@Override
 	public Long getTotalCount() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount");
 	}
 
 	@Override
@@ -44,20 +49,28 @@ public class NoticeDAO implements BoardDAO{
 		return sqlSession.insert(NAMESPACE+"setAdd", boardDTO);
 	}
 
+	public int setFileAdd(BoardFileDTO boardFileDTO) {
+		
+		return sqlSession.insert(NAMESPACE+"setFileAdd", boardFileDTO);
+	}
+	//update
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
 	}
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
 	}
 
 
-
+	public int setFileDelete(BoardDTO boardDTO) {
+		
+		return sqlSession.delete(NAMESPACE+"setFileDelete", boardDTO);
+	}
 	
 	
 }

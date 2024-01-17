@@ -23,14 +23,15 @@ public class FileManager {
 		
 		File f = new File(path);		
 		
+		if(f.isFile()) {
+			throw new Exception();
+		}
+	
 		if(!f.exists()) {
 			f.mkdirs();
 		}
 		System.out.println(file);
 		
-		if(f.isFile()) {
-			throw new Exception();
-		}
 		
 				
 		String fileName=UUID.randomUUID().toString()+"_"+file.getOriginalFilename();

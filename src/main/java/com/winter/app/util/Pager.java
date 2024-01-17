@@ -5,7 +5,7 @@ public class Pager {
 	private Long startRow;
 	private Long lastRow;
 	//페이지당 출력되는 글의 갯수
-	private Long perPage = 5L;
+	private Long perPage = 10L;
 	//페이지 번호 , 파라미터로 받기 위해
 	private Long page;
 	private Long startNum;
@@ -16,6 +16,11 @@ public class Pager {
 	// 이전, 다음 블럭 유무
 	private boolean start;
 	private boolean last; 
+	
+	//검색
+	
+	private String search;
+	private String kind;
 	
 	public void makeRow() {
 		
@@ -151,7 +156,22 @@ public class Pager {
 	public void setLast(boolean last) {
 		this.last = last;
 	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 	
-	
-		
+			
 }

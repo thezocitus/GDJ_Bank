@@ -5,6 +5,21 @@
   
  <mapper namespace="com.winter.app.board.notice.NoticeDAO">
  
+ 
+ 
+ 
+ 	<!-- update -->
+ 
+ 	<select id="setUpdate" parameterType="BoardDTO">
+ 		UPDATE NOTICE SET 
+ 			
+			BOARDNAME = #{boardName},
+			
+			BOARDCONTENTS = #{boardContents}
+					
+			WHERE BOARDNUM = #{boardNum}
+ 	</select>
+ 
  	<!-- List -->
  	<select id="getList" resultType="NoticeDTO" parameterType="Pager">
  		
@@ -12,6 +27,9 @@
  		SELECT * FROM
 	 		(SELECT ROWNUM R, N.* FROM
 	 			(SELECT * FROM NOTICE
+	 			
+	 			<include refid="search"/>
+	 			
 	 			 ORDER BY BOARDNUM DESC
 	 			 ) N
 	 		) RN
@@ -19,6 +37,39 @@
  	</select>
  	
  	
+ 	
+ 	<sql id="search">
+ 	<where>
+		<if test="kind=='kind1'">
+			BOARDNAME LIKE '%'||#{search}||'%'
+		</if>
+ 	 	<if test="kind=='kind2'">
+			BOARDCONTENTS LIKE '%'||#{search}||'%'
+		</if>
+ 		<if test="kind=='kind3'">
+			BOARDWRITER LIKE '%'||#{search}||'%'
+		</if> 		 		
+ 	</where> 	
+ 	</sql>
+ 	
+ 	
+ 	
+ 	<select id="getFileList" resultType="BoardFileDTO" parameterType="BoardDTO">
+ 	
+ 		SELECT FILENAME FROM NOTICEFILE WHERE BOARDNUM = #{boardNum}
+ 	 	
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="getTotalCount" resultType="Long">
+ 		
+ 		SELECT COUNT(BOARDNUM) FROM NOTICE
+ 		
+ 	</select>
+ 	
+ 	
+ 	 	
  	<!-- detail -->
  	<resultMap type="NoticeDTO" id="getDetailResult">
  	
@@ -50,11 +101,36 @@
  	
  	<!-- add  -->
  	<insert id="setAdd" parameterType="BoardDTO">
+ 	<selectKey keyProperty="boardNum" resultType="Long" order="BEFORE">
+ 		SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+ 	</selectKey>
  	
  		INSERT INTO NOTICE (BOARDNUM,BOARDNAME,BOARDWRITER,BOARDCONTENTS,BOARDDATE,BOARDCOUNT)
-					VALUES (BOARD_SEQ.NEXTVAL, #{boardName}, #{boardWriter}, #{boardContents}, SYSDATE, 0)
+					VALUES (#{boardNum}, #{boardName}, #{boardWriter}, #{boardContents}, SYSDATE, 0)
  	
  	</insert>
+ 	
+ 	<!-- fileAdd -->
+ 	<insert id="setFileAdd" parameterType="BoardFileDTO">
+ 	
+ 		INSERT INTO NOTICEFILE (FILENUM,BOARDNUM,FILENAME,ORIGNAME)
+		VALUES(BOARD_SEQ.NEXTVAL, #{boardNum}, #{fileName}, #{origName})
+		
+ 	</insert>
+ 	
+ 	<!-- delete -->
+ 	<delete id="setDelete" parameterType="BoardDTO" >
+ 	
+ 	DELETE NOTICE WHERE BOARDNUM = #{boardNum}
+ 		
+ 	
+ 	</delete>
+ 	
+ 	<delete id="setFileDelete" parameterType="BoardFileDTO">
+ 	
+ 	DELETE NOTICEFILE WHERE BOARDNUM = #{boardNum}
+ 	
+ 	</delete>
  	
  </mapper>
  

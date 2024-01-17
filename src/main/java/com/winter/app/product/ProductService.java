@@ -22,8 +22,10 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
-//	@Autowired
-//	private ServletContext servletContext;
+
+	@Autowired 
+	private ServletContext servletContext;
+
 	
 
 	
