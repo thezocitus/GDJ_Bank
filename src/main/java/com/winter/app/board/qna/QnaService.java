@@ -57,7 +57,7 @@ public class QnaService implements BoardService {
 		
 		pager.makeRow();
 		
-		Long totalcount = qnaDAO.getTotalCount();
+		Long totalcount = qnaDAO.getTotalCount(pager);
 		List<BoardDTO> ar =  qnaDAO.getList(pager);
 		pager.makeNum(totalcount);
 		return ar;

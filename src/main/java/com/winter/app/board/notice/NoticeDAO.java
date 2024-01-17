@@ -18,7 +18,7 @@ public class NoticeDAO implements BoardDAO{
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.winter.app.board.notice.NoticeDAO.";
 	
-
+	
 	public List<BoardFileDTO> getFileList(BoardDTO boardDTO){
 		
 		return sqlSession.selectList(NAMESPACE+"getFileList", boardDTO);
@@ -26,10 +26,11 @@ public class NoticeDAO implements BoardDAO{
 	}
 
 	@Override
-	public Long getTotalCount() throws Exception {
+	public Long getTotalCount(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE+"getTotalCount");
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount",pager);
 	}
+		
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
@@ -71,6 +72,11 @@ public class NoticeDAO implements BoardDAO{
 		
 		return sqlSession.delete(NAMESPACE+"setFileDelete", boardDTO);
 	}
+
+	
+
+	
+
 	
 	
 }

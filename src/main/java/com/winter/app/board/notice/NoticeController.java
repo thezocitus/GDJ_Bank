@@ -59,7 +59,7 @@ public class NoticeController {
 		
 		int result = boardService.setUpdate(boardDTO, attachs);
 	
-		return "board/update";
+		return "redirect:./list";
 	}
 	
 		

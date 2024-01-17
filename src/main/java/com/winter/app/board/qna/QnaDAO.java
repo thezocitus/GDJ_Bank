@@ -28,9 +28,9 @@ public class QnaDAO implements BoardDAO{
 	//lIST
 	
 	@Override
-	public Long getTotalCount() throws Exception {
+	public Long getTotalCount(Pager pager) throws Exception {
 		
-		return sqlSession.selectOne(NAMESPACE+"getTotalCount");
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
 	}
 
 	@Override

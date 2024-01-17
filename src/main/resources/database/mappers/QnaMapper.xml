@@ -2,141 +2,175 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="com.winter.app.board.qna.QnaDAO">
- 
- 
- 
- <!-- update -->
- 
- <update id="setUpdate" parameterType="BoardDTO">
 
- 	UPDATE QNA 
- 	<set>
- 	<if test="boardName != null and boardName!=''">
-	BOARDNAME =	#{boardName},
- 	</if>
-	BOARDCONTENTS = #{boardContents}
- 	</set>
-	WHERE BOARDNUM = #{boardNum}
- 
- </update>
- 
- 
- <!-- List -->
- 
- <select id="getFileList" parameterType="BoardDTO" resultType="BoardFileDTO">
- 	
- 	SELECT FILENAME FROM QNAFILE 
-	WHERE BOARDNUM = #{boardNum}
- 
- </select>
- 
- 
- <select id="getList" resultType="QnaDTO" parameterType="Pager">
- 
- 	SELECT * FROM 
-	(SELECT ROWNUM R,  Q.* FROM  
-	
-		(SELECT * FROM QNA 	
-		
+<mapper namespace="com.winter.app.board.qna.QnaDAO">
+
+
+
+	<!-- update -->
+
+	<update id="setUpdate" parameterType="BoardDTO">
+
+		UPDATE QNA
+		<set>
+			<if test="boardName != null and boardName!=''">
+				BOARDNAME = #{boardName},
+			</if>
+			BOARDCONTENTS = #{boardContents}
+		</set>
+		WHERE BOARDNUM = #{boardNum}
+
+	</update>
+
+
+	<!-- List -->
+
+	<select id="getFileList" parameterType="BoardDTO" resultType="BoardFileDTO">
+
+		SELECT FILENAME FROM QNAFILE
+		WHERE BOARDNUM = #{boardNum}
+
+	</select>
+
+
+	<select id="getList" resultType="QnaDTO" parameterType="Pager">
+
+		SELECT * FROM
+		(SELECT ROWNUM R, Q.* FROM
+
+		(SELECT * FROM QNA
+
+		<include refid="search" />
+
 		ORDER BY BOARDREF DESC, BOARDSTEP ASC)Q
-	
-	)RQ
-		WHERE R BETWEEN #{startRow} and #{lastRow}
- 
- 
- </select>
- 
+
+		)RQ
+		WHERE R BETWEEN #{startRow}
+		and #{lastRow}
+
+
+	</select>
+
 	<select id="getTotalCount" resultType="Long">
- 		
- 		SELECT COUNT(BOARDNUM) FROM QNA
- 		
- 	</select>
- 
- <!-- detail -->
- 
- 
- <resultMap type="QnaDTO" id="getDetailResult">
- 
- 		<id column="BOARDNUM" property="boardNum"/>
- 		<result column="BOARDNAME" property="boardName"/>
- 		<result column="BOARDWRITER" property="boardWriter"/>
- 		<result column="BOARDCONTENTS" property="boardContents"/>
- 		<result column="BOARDDATE" property="boardDate"/>
- 		<result column="BOARDCOUNT" property="boardCount"/>
- 		<result column="BOARDREF" property="boardRef"/>
- 		<result column="BOARDSTEP" property="boardStep"/>
- 		<result column="BOARDDEPTH" property="boardDepth"/>
- 
- </resultMap> 
- 
- 
- <select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
- 	
- 	 SELECT *
-	 	FROM QNA Q
-	 	LEFT JOIN QNAFILE QF
-	 	USING (BOARDNUM) 
-	 WHERE BOARDNUM = #{boardNum}
- 
- </select>
- 
- <!-- reply add  -->
- 
- 	<insert id="setReplyAdd" parameterType="QnaDTO">
- 		<selectKey keyProperty="boardNum" resultType="Long" order="BEFORE">
- 		SELECT BOARD_SEQ.NEXTVAL FROM DUAL
- 		</selectKey>
- 		
- 		INSERT INTO QNA (BOARDNUM,BOARDNAME,BOARDWRITER,BOARDCONTENTS,BOARDDATE,BOARDCOUNT,BOARDREF,BOARDSTEP,BOARDDEPTH)
-					VALUES (#{boardNum}, #{boardName}, #{boardWriter}, #{boardContents}, SYSDATE, 0, #{boardRef},#{boardStep},#{boardDepth})
- 	
- 	</insert>
- 
- <!-- add  -->
- 	<insert id="setAdd" parameterType="QnaDTO">
- 		<selectKey keyProperty="boardNum" resultType="Long" order="BEFORE">
- 		SELECT BOARD_SEQ.NEXTVAL FROM DUAL
- 		</selectKey>
- 	
- 		INSERT INTO QNA (BOARDNUM,BOARDNAME,BOARDWRITER,BOARDCONTENTS,BOARDDATE,BOARDCOUNT,BOARDREF,BOARDSTEP,BOARDDEPTH)
-					VALUES (#{boardNum}, #{boardName}, #{boardWriter}, #{boardContents}, SYSDATE, 0, #{boardNum},0,0)
- 	
- 	</insert>
- <!-- File Add -->	
- 	<insert id="setFileAdd" parameterType="BoardFileDTO">
- 	
- 	INSERT INTO QNAFILE (FILENUM,BOARDNUM,FILENAME,ORIGNAME)
-	VALUES(FILE_SEQ.NEXTVAL, #{boardNum}, #{fileName}, #{origName})
+
+		SELECT COUNT(BOARDNUM)	FROM QNA
+		<include refid="search" />
+	</select>
+
+
+	<sql id="search">
+		<where>
+			<if test="kind=='kind1'">
+				BOARDNAME LIKE '%'||#{search}||'%'
+			</if>
+			<if test="kind=='kind2'">
+				BOARDCONTENTS LIKE '%'||#{search}||'%'
+			</if>
+			<if test="kind=='kind3'">
+				BOARDWRITER LIKE '%'||#{search}||'%'
+			</if>
+		</where>
+	</sql>
+
 	
- 	
- 	
- 	</insert>
 
-<!--  -->
-<update id="setDelete" parameterType="QnaDTO">
+	<!-- detail -->
 
-	UPDATE QNA SET FLAG =#{flag}
-	WHERE BOARDNUM = #{boardNum}
 
-</update> 
- 	
- 	
- <!-- reply Step update  -->
- 	<update id="setReplyUpdate" parameterType="QnaDTO">
- 		
- 		UPDATE QNA SET BOARDSTEP = BOARDSTEP + 1 
-		WHERE BOARDREF = #{boardRef} AND BOARDSTEP > #{boardStep}
- 	
- 	</update>
- 
- 
- <!-- delete -->
- 	<delete id="setFileDelete" parameterType="BoardFileDTO">
- 		
- 		DELETE QNAFILE WHERE BOARDNUM = #{boardNum}
- 		
- 	</delete>
- 
- </mapper>
+	<resultMap type="QnaDTO" id="getDetailResult">
+
+		<id column="BOARDNUM" property="boardNum" />
+		<result column="BOARDNAME" property="boardName" />
+		<result column="BOARDWRITER" property="boardWriter" />
+		<result column="BOARDCONTENTS" property="boardContents" />
+		<result column="BOARDDATE" property="boardDate" />
+		<result column="BOARDCOUNT" property="boardCount" />
+		<result column="BOARDREF" property="boardRef" />
+		<result column="BOARDSTEP" property="boardStep" />
+		<result column="BOARDDEPTH" property="boardDepth" />
+
+	</resultMap>
+
+
+	<select id="getDetail" parameterType="BoardDTO"
+		resultMap="getDetailResult">
+
+		SELECT *
+		FROM QNA Q
+		LEFT JOIN QNAFILE QF
+		USING (BOARDNUM)
+		WHERE
+		BOARDNUM = #{boardNum}
+
+	</select>
+
+	<!-- reply add -->
+
+	<insert id="setReplyAdd" parameterType="QnaDTO">
+		<selectKey keyProperty="boardNum" resultType="Long"
+			order="BEFORE">
+			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO QNA
+		(BOARDNUM,BOARDNAME,BOARDWRITER,BOARDCONTENTS,BOARDDATE,BOARDCOUNT,BOARDREF,BOARDSTEP,BOARDDEPTH)
+		VALUES (#{boardNum}, #{boardName}, #{boardWriter}, #{boardContents},
+		SYSDATE, 0, #{boardRef},#{boardStep},#{boardDepth})
+
+	</insert>
+
+	<!-- add -->
+	<insert id="setAdd" parameterType="QnaDTO">
+		<selectKey keyProperty="boardNum" resultType="Long"
+			order="BEFORE">
+			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO QNA
+		(BOARDNUM,BOARDNAME,BOARDWRITER,BOARDCONTENTS,BOARDDATE,BOARDCOUNT,BOARDREF,BOARDSTEP,BOARDDEPTH)
+		VALUES (#{boardNum}, #{boardName}, #{boardWriter}, #{boardContents},
+		SYSDATE, 0, #{boardNum},0,0)
+
+	</insert>
+	<!-- File Add -->
+	<insert id="setFileAdd" parameterType="BoardFileDTO">
+
+		INSERT INTO QNAFILE
+		(FILENUM,BOARDNUM,FILENAME,ORIGNAME)
+		VALUES(FILE_SEQ.NEXTVAL,
+		#{boardNum}, #{fileName}, #{origName})
+
+
+
+	</insert>
+
+	<!-- -->
+	<update id="setDelete" parameterType="QnaDTO">
+
+		UPDATE QNA SET FLAG
+		=#{flag}
+		WHERE BOARDNUM = #{boardNum}
+
+	</update>
+
+
+	<!-- reply Step update -->
+	<update id="setReplyUpdate" parameterType="QnaDTO">
+
+		UPDATE QNA SET
+		BOARDSTEP = BOARDSTEP + 1
+		WHERE BOARDREF = #{boardRef} AND BOARDSTEP >
+		#{boardStep}
+
+	</update>
+
+
+	<!-- delete -->
+	<delete id="setFileDelete" parameterType="BoardFileDTO">
+
+		DELETE QNAFILE WHERE
+		BOARDNUM = #{boardNum}
+
+	</delete>
+
+</mapper>

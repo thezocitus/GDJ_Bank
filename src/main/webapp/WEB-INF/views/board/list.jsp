@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
 
 		<div class="text-center mb-5">
 			<h1 class="display-5 fw-bolder mb-0">
-				<span class="text-gradient d-inline">${board} List</span>
+				<span class="text-gradient d-inline"> ${board} List</span>
 			</h1>
 		</div>
 
@@ -73,21 +74,27 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<form action="./list" method="get">
+		<div>
+			<form class="row g-3" action="./list">
+				<div class="col-auto">
+					<select name="kind" class="form-select"
+						aria-label="Default select example">
+						<option class="a" value="kind1">Title</option>
+						<option class="a" value="kind2">Contents</option>
+						<option class="a" value="kind3">Writer</option>						
+					</select>
+				</div>
 
-			<select class="form-select" name="kind">
-				<option value="kind1">Title</option>
-				<option value="kind2">Contents</option>
-				<option value="kind3">Writer</option>
-			</select>
+				<div class="col-auto">
+					<label for="search" class="visually-hidden">Search</label> <input
+						type="text" name="search" class="form-control" id="search">
+				</div>
 
-			<div class="input-group mb-3">
-
-				<input type="text" class="form-control" name="search">
-				<button class="btn btn-outline-secondary" type="submit">검색</button>
-
-			</div>
-		</form>
+				<div class="col-auto">
+					<button type="submit" class="btn btn-primary mb-3">검색</button>
+				</div>
+			</form>
+		</div>
 
 
 		<div>
@@ -105,8 +112,8 @@
 						href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 				</c:forEach>
 				<li class="page-item"><a class="page-link"
-					href="./list?page=${pager.lastNum+1}" aria-label="Next"> <span
-						aria-hidden="true">&raquo;</span>
+					href="./list?page=${pager.lastNum+1}" aria-label="Next">
+					 <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
 		</nav>

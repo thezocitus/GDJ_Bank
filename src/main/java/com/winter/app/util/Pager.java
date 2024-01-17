@@ -31,6 +31,8 @@ public class Pager {
 	
 	public void makeNum(Long totalCount) {
 		//1. 총 갯수로 총 페이지 수 구하기
+		System.out.println(totalCount);
+		
 		if(totalCount<1) {
 			totalCount=1L;
 		}		

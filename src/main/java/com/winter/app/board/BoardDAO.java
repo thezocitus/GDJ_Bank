@@ -8,7 +8,7 @@ public interface BoardDAO {
 
 	
 		//totalCount
-		public Long getTotalCount()throws Exception;
+		public Long getTotalCount(Pager pager)throws Exception;
 		
 		//list
 		public List<BoardDTO> getList(Pager pager)throws Exception;
@@ -25,6 +25,7 @@ public interface BoardDAO {
 		//delete
 		public int setDelete(BoardDTO boardDTO)throws Exception;
 
+	
 	
 	
 }
