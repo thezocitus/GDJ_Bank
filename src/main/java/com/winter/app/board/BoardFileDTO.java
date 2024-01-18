@@ -4,10 +4,7 @@ import com.winter.app.files.FileDTO;
 
 public class BoardFileDTO extends FileDTO{
 	
-	private Long boardNum;
-	
-	
-	
+	private Long boardNum;	
 
 	public Long getBoardNum() {
 		return boardNum;

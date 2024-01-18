@@ -56,6 +56,8 @@ public class NoticeService implements BoardService{
 		return boardDAO.getDetail(boardDTO);
 	}
 
+	
+	//add
 	@Override
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
 		

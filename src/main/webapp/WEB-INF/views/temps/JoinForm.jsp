@@ -9,15 +9,15 @@
 					  <label for="title" class="form-label" >제목</label>
 					  <input type="text" class="form-control" id="title" name="boardName" value="${boardDTO.boardName}">
 					</div>
-					<%-- <div class="mb-3">
+					<div class="mb-3">
 					  <label for="writer" class="form-label">작성자</label>
 					  <input type="text" class="form-control" id="writer" name="boardWriter" value="${boardDTO.boardWriter}">
-					</div> --%>
+					</div>
 					<div class="mb-3">
 					  <label for="contents" class="form-label">내용</label>
 					  <textarea class="form-control" id="contents"   name=boardContents rows="3">${boardDTO.boardContents}</textarea>
 					</div>
-										
+					
 					<div class="mb-3">
 						<input type="file" name="attachs">
 						<input type="file" name="attachs">
