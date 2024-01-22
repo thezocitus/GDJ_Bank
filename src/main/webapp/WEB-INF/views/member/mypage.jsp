@@ -25,12 +25,12 @@
                            
                             <h1 class="fw-bolder">Welcome To MUNG'S LAND</h1>
                             
-                            <c:if test="${mem.AvatarDTO.fileName == null}">
+                            <c:if test="${mem.avatarDTO.fileName == null}">
                             <img src="/resources/assets/Pablobg.png" class="rounded mx-auto d-block" alt="...">
                             </c:if>
                             
-                            <c:if test="${mem.AvatarDTO.fileName != null}">
-                            <img src="/resources/upload/memberFiles/${mem.AvatarDTO.fileName}" class="rounded mx-auto d-block" alt="...">
+                            <c:if test="${mem.avatarDTO.fileName != null}">
+                            <img src="/resources/upload/memberFiles/${mem.avatarDTO.fileName}" class="rounded mx-auto d-block" alt="...">
                             </c:if>
                             <p class="lead fw-normal text-muted mb-0">Let's work together!</p>
                         </div>
@@ -41,37 +41,37 @@
                                       <div class="form-floating mb-3">
                                         <input class="form-control" id="name" name="name" type="text" placeholder="name" disabled/>
                                         <label for="name">${mem.name}</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">${mem.name}</div>
+                                      
                                     </div>     
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="userName" name="userName" type="text" placeholder="userName" disabled/>
                                         <label for="userName">${mem.userName}</label>
-                                        <div class="invalid-feedback" data-sb-feedback="productName:required">${mem.userName}</div>
+                                     
                                     </div>                                  
                                   
                                        
                                    <div class="form-floating mb-3">
                                         <input class="form-control" id="rate" name="password" type="password" placeholder="password" disabled/>
                                         <label for="password">${mem.password}</label>
-                                        <div class="invalid-feedback"data-sb-feedback="password:required" >${mem.password}</div>
+                                     
                                     </div> 
                                   
                                    <div class="form-floating mb-3">
                                         <input class="form-control" id="rate" name="phone" type="text" placeholder="phone" disabled/>
                                         <label for="phone">${mem.phone}</label>
-                                        <div class="invalid-feedback" data-sb-feedback="phone:required">${mem.phone}</div>
+                                 
                                     </div>                                 
                                   
                                       <div class="form-floating mb-3">
                                         <input class="form-control" id="rate" name="email" type="email" placeholder="email" disabled/>
                                         <label for="email">${mem.email}</label>
-                                        <div class="invalid-feedback" data-sb-feedback="email:required">${mem.email}</div>
+                                      
                                     </div>            
                                    
                                 	  <div class="form-floating mb-3">
                                         <input class="form-control" id="rate" name="address" type="text" placeholder="address" disabled/>
                                         <label for="address">${mem.address}</label>
-                                        <div class="invalid-feedback" data-sb-feedback="address:required">${mem.address}</div>
+                                       
                                     </div>     
                                     
                                  
@@ -85,11 +85,13 @@
                                     </div>
                                   
                                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                                    <!-- Submit Button-->
+                                    <!-- Submit Button-->                                	
                                 	
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
-                                
+                                   
                                 </form>
+                                  <form id="submitButton" action="mypage" method="get" enctype="multipart/form-data">
+                                 <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" name="update" type="submit">수정</button></div>
+                                 </form>
                             </div>
                         </div>
                     </div>

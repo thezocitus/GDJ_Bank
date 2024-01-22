@@ -28,40 +28,37 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">                             
-                                <form id="addForm" action="join" method="post" enctype="multipart/form-data">
+                                <form id="addForm" action="update" method="post" enctype="multipart/form-data">
                                     <!-- 상품명 input-->
                                       <div class="form-floating mb-3">
-                                        <input class="form-control" id="name" name="name" type="text" placeholder="name"/>
-                                        <label for="name">이름</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">이름</div>
-                                    </div>
+                                        <input class="form-control" id="name" name="name" type="text" placeholder="name" value="${member.name}"/>
+                                        <label for="name">이름</label>                                    
+                                    </div>     
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" name="userName" type="text" placeholder="userName" />
-                                        <label for="userName">userName</label>
-                                        <div class="invalid-feedback" data-sb-feedback="productName:required">아이디</div>
+                                        <input class="form-control" id="userName" name="userName" type="text" placeholder="userName" value="${member.userName}" disabled/>
+                                        <label for="userName">ID</label>                                       
                                     </div>                                  
                                   
                                        <!-- 이자율  input-->
                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="password" type="password" placeholder="password" />
+                                        <input class="form-control" id="rate" name="password" type="password" value="${member.password}" placeholder="password" />
                                         <label for="password">비밀번호</label>
-                                        <div class="invalid-feedback"data-sb-feedback="password:required" >password</div>
+                                        
                                     </div> 
                                      <!-- 점수  input-->
                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="phone" type="text" placeholder="phone" />
+                                        <input class="form-control" id="rate" name="phone" type="text" placeholder="phone" value="${member.phone}" />
                                         <label for="phone">전화번호</label>
-                                        <div class="invalid-feedback" data-sb-feedback="phone:required">전화번호</div>
+                                       
                                     </div>                                 
                                     <!-- detail input-->
                                       <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="email" type="email" placeholder="email" />
-                                        <label for="email">이메일</label>
-                                        <div class="invalid-feedback" data-sb-feedback="email:required">이메일</div>
+                                        <input class="form-control" id="rate" name="email" type="email" value="${member.email}" placeholder="email" />
+                                        <label for="email">이메일</label>                                        
                                     </div>            
                                       <!-- detail input-->
                                 	  <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="address" type="text" placeholder="address" />
+                                        <input class="form-control" id="rate" name="address" type="text" value="${member.address}" placeholder="address" />
                                         <label for="address">주소</label>
                                         <div class="invalid-feedback" data-sb-feedback="address:required">주소</div>
                                     </div>     

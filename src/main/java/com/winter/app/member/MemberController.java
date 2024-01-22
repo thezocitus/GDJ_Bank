@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 
 
 @Controller
@@ -96,15 +98,34 @@ public class MemberController {
 	@GetMapping("mypage")
 	public String getMemberDetail(HttpSession session, Model model) {
 		
-		MemberDTO mem =(MemberDTO)session.getAttribute("member");
-		
-		System.out.println(mem.getUserName());
-		
+		MemberDTO mem =(MemberDTO)session.getAttribute("member");		
 		model.addAttribute("mem", mem);
 		
 		return "member/mypage";
 		
 	}
 	
+	//update
+	@GetMapping("update")
+	public String setUpdate(MemberDTO memberDTO, Model model) {
+		
+		
+		memberDTO = memberService.getDetail(memberDTO);
+		model.addAttribute("member", memberDTO);
+		return "member/update";
+		
+	}
+	
+	@PostMapping("update")
+	public String setUpdate(MemberDTO memberDTO, HttpSession session) {		
+	
+		MemberDTO mem = (MemberDTO)session.getAttribute("member");
+		memberDTO.setUserName(mem.getUserName());
+		memberDTO.setAvatarDTO(mem.getAvatarDTO());
+		session.setAttribute("member", mem);
+		int result = memberService.setUpdate(memberDTO);
+		
+		return "redirect:./";
+	}
 	
 }

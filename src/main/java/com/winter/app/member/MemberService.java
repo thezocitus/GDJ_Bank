@@ -86,9 +86,18 @@ public class MemberService {
 		
 	}
 	
+	public MemberDTO getDetail(MemberDTO memberDTO) {
+		
+		return memberDTO = memberDAO.getDetail(memberDTO);
+		
+		
+	}
 	
-	
-	
-	
+	public int setUpdate(MemberDTO memberDTO) {
+		
+		return memberDAO.setUpdate(memberDTO);
+		
+		
+	}
 	
 }

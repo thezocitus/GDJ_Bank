@@ -55,5 +55,28 @@
 	
 	 </resultMap>
 	 
+	 
+	 <!--update  -->
+	 
+	<update id="setUpdate" parameterType="MemberDTO">
+	
+		UPDATE MEMBER
+			<set>
+				<if test="name != null ||  name !=''">
+					NAME = #{name},
+				</if>
+				<if test="name != null ||  name !=''">
+					EMAIL = #{email},
+				</if>
+				<if test="name != null ||  name !=''">
+					PHONE = #{phone},
+				</if>
+				<if test="name != null ||  name !=''">
+					ADDRESS = #{address}
+				</if>				
+			</set>
+			WHERE = USERNAME = ${userName}
+				
+	</update>	 
  
  </mapper>
