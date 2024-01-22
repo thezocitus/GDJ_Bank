@@ -53,6 +53,12 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("agreement")
+	public void setAgreement() {
+		
+	}
+	
+	
 	
 //member
 	
@@ -138,10 +144,7 @@ public class MemberController {
 		memberDTO.setUserName(mem.getUserName());
 		memberDTO.setAvatarDTO(mem.getAvatarDTO());
 		session.setAttribute("member", mem);
-		int result = memberService.setUpdate(memberDTO);
-			
-		
-		
+		int result = memberService.setUpdate(memberDTO);		
 		
 		return "redirect:./";
 	}

@@ -29,85 +29,80 @@ public class WriterCheckInterceptor extends HandlerInterceptorAdapter{
 	
 	
 	
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+			// /qna/update, /notice/update
+			String path = request.getRequestURI();
+			path = path.substring(0, path.lastIndexOf("/"));
+			
+			//num 
+			long n = Long.parseLong(request.getParameter("boardNum"));
+			
+			BoardDTO boardDTO = new BoardDTO();
+			boardDTO.setBoardNum(n);
+			
+			if(path.equals("/qna")) {
+				boardDTO= qnaDAO.getDetail(boardDTO);
+			}else {
+				boardDTO= noticeDAO.getDetail(boardDTO);
+			}
+			
+			//
+			MemberDTO memberDTO = (MemberDTO)request.getSession().getAttribute("member");
+			
+			if(boardDTO.getBoardWriter().equals(memberDTO.getUserName())) {
+				return true;
+			}else {
+				request.setAttribute("path", "./list");
+				request.setAttribute("msg", "작성자만 가능");
+				RequestDispatcher v = request.getRequestDispatcher("/WEB-INF/views/commons/result.jsp");
+				v.forward(request, response);
+				return false;
+			}		
+	}
+	
+//	
 //	@Override
-//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-//			throws Exception {
-//		// TODO Auto-generated method stub
-//		String path = request.getRequestURI();
-//		
-//		path.substring(0, path.lastIndexOf("/"));
-//		
-//		//num
-//		Long n = Long.parseLong(request.getParameter("boardNum"));
-//		
-//		BoardDTO boardDTO = new BoardDTO();
-//		boardDTO.setBoardNum(n);
+//	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+//			ModelAndView modelAndView) throws Exception {
 //				
-//		if(path.equals("/qna")) {
-//			qnaDAO.getDetail(null);
-//		}else {
-//			noticeDAO.getDetail(null);
+//		
+//		String method = request.getMethod();
+//		
+//		if(method.toUpperCase().equals("POST")) {
+//			return;
 //		}
 //		
-//		//
+//		
+//		Map<String, Object> map = modelAndView.getModel();
+//		Iterator<String> it = map.keySet().iterator();
+//		
+//		while(it.hasNext()) {
+//			String k = it.next();
+//			System.out.println(k);
+//			System.out.println(map.get(k));
+//			
+//		}
+//		
+//		System.out.println(modelAndView.getViewName()+"   TEST"); 
+//		
+//		
+//		BoardDTO boardDTO =(BoardDTO) map.get("boardDTO");
+//		
+//		//로그인 정보
 //		
 //		MemberDTO memberDTO = (MemberDTO)request.getSession().getAttribute("member");
 //		
-//		if(boardDTO.getBoardWriter().equals(memberDTO.getUserName())) {
-//			return true;
-//		}else {
-//			RequestDispatcher v = request.getRequestDispatcher("WEB-INF/views/commons.result.jp");
-//
-//					modelAndView.addObject("msg", "작성자만 수정할 수 있습니다.");
-//					modelAndView.addObject("path","./list");
-//					modelAndView.setViewName("commons/result");
-//					return false;
+//		if(!boardDTO.getBoardWriter().equals(memberDTO.getUserName())) {
+//			
+//			modelAndView.addObject("msg", "작성자만 수정할 수 있습니다.");
+//			modelAndView.addObject("path","./list");
+//			modelAndView.setViewName("commons/result");
+//			
 //		}
-
 //		
+//		super.postHandle(request, response, handler, modelAndView);
 //	}
-	
-	
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-				
-		
-		String method = request.getMethod();
-		
-		if(method.toUpperCase().equals("POST")) {
-			return;
-		}
-		
-		
-		Map<String, Object> map = modelAndView.getModel();
-		Iterator<String> it = map.keySet().iterator();
-		
-		while(it.hasNext()) {
-			String k = it.next();
-			System.out.println(k);
-			System.out.println(map.get(k));
-			
-		}
-		
-		System.out.println(modelAndView.getViewName()); 
-		
-		
-		BoardDTO boardDTO =(BoardDTO) map.get("boardDTO");
-		
-		//로그인 정보
-		
-		MemberDTO memberDTO = (MemberDTO)request.getSession();
-		
-		if(!boardDTO.getBoardWriter().equals(memberDTO.getUserName())) {
-			
-			modelAndView.addObject("msg", "작성자만 수정할 수 있습니다.");
-			modelAndView.addObject("path","./list");
-			modelAndView.setViewName("commons/result");
-			
-		}
-		
-		super.postHandle(request, response, handler, modelAndView);
-	}
-	
+//	
 }

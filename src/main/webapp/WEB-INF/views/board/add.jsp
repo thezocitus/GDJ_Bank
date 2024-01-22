@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <!-- 사용전 경로 수정 -->
    <c:import url="../temps/head_css.jsp"/> 
+   <c:import url="../temps/summernote.jsp"></c:import>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -20,5 +21,9 @@
  			<c:import url="../temps/boardForm.jsp"/>
         </main> 
         <c:import url="../temps/footer.jsp"/>
+       
+       <script type="text/javascript">
+        $("#contents").summernote();
+       </script>
     </body>
 </html>

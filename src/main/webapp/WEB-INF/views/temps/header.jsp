@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 
@@ -30,7 +31,7 @@
 					
 					<c:if test="${empty member}">
 					<li class="nav-item"><a class="nav-link" href="/member/login">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="/member/join">Join</a></li>		
+					<li class="nav-item"><a class="nav-link" href="/member/agreement">Join</a></li>		
 					</c:if>
 					
 					<c:if test="${not empty member}">
