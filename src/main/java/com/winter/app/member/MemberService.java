@@ -85,7 +85,7 @@ public class MemberService {
 		return m;
 		
 	}
-	
+	//update	
 	public MemberDTO getDetail(MemberDTO memberDTO) {
 		
 		return memberDTO = memberDAO.getDetail(memberDTO);
@@ -93,11 +93,17 @@ public class MemberService {
 		
 	}
 	
+	
+	
 	public int setUpdate(MemberDTO memberDTO) {
 		
 		return memberDAO.setUpdate(memberDTO);
 		
 		
 	}
+	
+	
+	
+	
 	
 }

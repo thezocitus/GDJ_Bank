@@ -28,7 +28,7 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">                             
-                                <form id="addForm" action="join" method="post" enctype="multipart/form-data">
+                                <form id="addForm" action="update" method="post" enctype="multipart/form-data">
                                     <!-- 상품명 input-->
                                       <div class="form-floating mb-3">
                                         <input class="form-control" id="name" name="name" type="text" placeholder="name"/>

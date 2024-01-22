@@ -43,12 +43,14 @@
                       <div>
                       	<c:if test="${bbs == 1}">
                       	<a class="btn btn-primary" href="reply?boardNum=${boardDTO.boardNum}">답글</a>
+                        </c:if >
+                        <c:if test="${boardDTO.boardWriter eq member.userName}">
+                            <a id="update" class="btn btn-info" href="#" >update</a> 
+                            <a id="del" class="btn btn-primary" href="#">delete</a>
                         </c:if>
-                        <a id="update" class="btn btn-info" href="#" >update</a> 
-                        <a id="del" class="btn btn-primary" href="#">delete</a>
-                        <form id="frm" action="update" method="get">
+                            <form id="frm" action="update" method="get">
                                 <input type="hidden" name="boardNum" value="${boardDTO.boardNum}">
-                        </form>                                                                                  
+                            </form>                                                                                  
                       </div>
                         
                 </div>

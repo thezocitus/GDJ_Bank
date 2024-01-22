@@ -96,11 +96,11 @@
 			</form>
 		</div>
 
-
+		<c:if test="${not empty member}">
 		<div>
 			<a href="./add" class="btn btn-danger">글쓰기</a>
 		</div>
-
+		</c:if>
 		<nav aria-label="Page">
 			<ul class="pagination">
 				<li class="page-item"><a class="page-link"

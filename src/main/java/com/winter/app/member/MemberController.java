@@ -24,6 +24,8 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
+	
+	
 	//Join
 	
 	@GetMapping("join")
@@ -99,31 +101,47 @@ public class MemberController {
 	public String getMemberDetail(HttpSession session, Model model) {
 		
 		MemberDTO mem =(MemberDTO)session.getAttribute("member");		
-		model.addAttribute("mem", mem);
+		mem = memberService.getDetail(mem);
+		model.addAttribute("member", mem);
 		
 		return "member/mypage";
 		
 	}
 	
+	/*
+	 * @GetMapping("mypage") public void getMemberDetail(HttpSession session, Model
+	 * model) {
+	 * 
+	 * MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); memberDTO =
+	 * memberService.getDetail(memberDTO); model.addAttribute("member",memberDTO);
+	 * 
+	 * }
+	 */
+	
+	
 	//update
 	@GetMapping("update")
-	public String setUpdate(MemberDTO memberDTO, Model model) {
-		
-		
-		memberDTO = memberService.getDetail(memberDTO);
-		model.addAttribute("member", memberDTO);
-		return "member/update";
-		
-	}
+	public  void setUpdate()throws Exception{}
+	/*
+	 * @PostMapping("update") public void setUpdate(HttpSession session, Model
+	 * model) { MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+	 * memberDTO = memberService.getDetail(memberDTO);
+	 * model.addAttribute("member",memberDTO);
+	 * 
+	 * }
+	 */
 	
 	@PostMapping("update")
-	public String setUpdate(MemberDTO memberDTO, HttpSession session) {		
+	public String setUpdate(MemberDTO memberDTO, HttpSession session,Model model) {		
 	
 		MemberDTO mem = (MemberDTO)session.getAttribute("member");
 		memberDTO.setUserName(mem.getUserName());
 		memberDTO.setAvatarDTO(mem.getAvatarDTO());
 		session.setAttribute("member", mem);
 		int result = memberService.setUpdate(memberDTO);
+			
+		
+		
 		
 		return "redirect:./";
 	}
