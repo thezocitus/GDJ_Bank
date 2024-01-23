@@ -31,19 +31,19 @@
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input checks" type="checkbox" value="" id="a1" >
+				  <input class="form-check-input checks req" type="checkbox" value="" id="a1" >
 				  <label class="form-check-label" for="a1">
 				    필수 동의 1
 				  </label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input checks" type="checkbox" value="" id="a2" >
+					<input class="form-check-input checks req" type="checkbox" value="" id="a2" >
 					<label class="form-check-label" for="a2">
 					  필수 동의 2
 					</label>
 				</div>
 				<div class="form-check">
-				<input class="form-check-input checks" type="checkbox" value="" id="a3" >
+				<input class="form-check-input checks req"  type="checkbox" value="" id="a3" >
 				<label class="form-check-label" for="a3">
 					필수 동의 3
 				</label>
@@ -61,12 +61,9 @@
 				<label class="form-check-label" for="a5">
 					선택 동의 2
 				</label>
-				</div>
-				<div class="form-check">
-				<input class="form-check-input checks opts" type="checkbox" value="" id="a5" >
-				<label class="form-check-label" for="a5">
-					선택 동의 3
-				</label>
+				
+				<div>
+					<a class="btn btn-primary" id="join">화원가입</a> 
 				</div>
 
 			</div>
@@ -74,7 +71,7 @@
  
         </main> 
         <c:import url="../temps/footer.jsp"></c:import>
-        <script src="../resources/js/agreement.js" type="text/javascript">
+        <script src="../resources/js/member/agreement.js" type="text/javascript">
         
         </script>
     </body>

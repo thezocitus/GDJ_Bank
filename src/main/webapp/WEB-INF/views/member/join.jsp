@@ -28,42 +28,40 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">                             
-                                <form id="addForm" action="update" method="post" enctype="multipart/form-data">
+                                <form id="addForm" action="join" method="post" enctype="multipart/form-data">
                                     <!-- 상품명 input-->
                                       <div class="form-floating mb-3">
                                         <input class="form-control" id="name" name="name" type="text" placeholder="name"/>
-                                        <label for="name">이름</label>
-                                        <div class="invalid-feedback" data-sb-feedback="name:required">이름</div>
+                                        <label for="name">이름</label>                                        
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="userName" name="userName" type="text" placeholder="userName" />
-                                        <label for="userName">userName</label>
-                                        <div class="invalid-feedback" data-sb-feedback="productName:required">아이디</div>
-                                    </div>                                  
+                                        <label for="userName">userName</label>                                    
+                                    </div>                              
                                   
-                                       <!-- 이자율  input-->
+                                       <!-- password  input-->
                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="password" type="password" placeholder="password" />
-                                        <label for="password">비밀번호</label>
-                                        <div class="invalid-feedback"data-sb-feedback="password:required" >password</div>
+                                        <input class="form-control"  name="password" id="password" type="password" placeholder="password" />
+                                        <label for="password">비밀번호</label>                                                                              
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control"  name="passwordCheck" id="passwordCheck" type="password" placeholder="password" />
+                                        <label for="passwordCheck">비밀번호확인</label>                                                                          
                                     </div> 
                                      <!-- 점수  input-->
                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="phone" type="text" placeholder="phone" />
-                                        <label for="phone">전화번호</label>
-                                        <div class="invalid-feedback" data-sb-feedback="phone:required">전화번호</div>
+                                        <input class="form-control"  name="phone" type="text" placeholder="phone" />
+                                        <label for="phone">전화번호</label>                                     
                                     </div>                                 
                                     <!-- detail input-->
                                       <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="email" type="email" placeholder="email" />
-                                        <label for="email">이메일</label>
-                                        <div class="invalid-feedback" data-sb-feedback="email:required">이메일</div>
+                                        <input class="form-control"  name="email" type="email" placeholder="email" />
+                                        <label for="email">이메일</label>                                      
                                     </div>            
                                       <!-- detail input-->
                                 	  <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="address" type="text" placeholder="address" />
-                                        <label for="address">주소</label>
-                                        <div class="invalid-feedback" data-sb-feedback="address:required">주소</div>
+                                        <input class="form-control" name="address" type="text" placeholder="address" />
+                                        <label for="address">주소</label>                                    
                                     </div>     
                                     
                                       <!-- files  -->
@@ -82,7 +80,7 @@
                                   
                                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                                     <!-- Submit Button-->
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
+                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">JOIN</button></div>
                                 </form>
                             </div>
                         </div>
@@ -91,5 +89,6 @@
             </section>       
         </main> 
         <c:import url="../temps/footer.jsp"></c:import>
+        <script src="../resources/js/member/joinCheck.js" type="text/javascript"></script> 
     </body>
 </html>

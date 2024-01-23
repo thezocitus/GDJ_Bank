@@ -29,13 +29,12 @@ public class MemberController {
 	//Join
 	
 	@GetMapping("join")
-	public String join() {
-		
-		return "member/join";
-		
+	public String join() {		
+		return "member/join";		
 	}
+	
 	@PostMapping("join")
-	public String join(MemberDTO memberDTO, MultipartFile[] attach, Model model) throws Exception{
+	public String join(MemberDTO memberDTO, MultipartFile attach, Model model) throws Exception{
 		
 		int result = memberService.join(memberDTO,attach);
 		

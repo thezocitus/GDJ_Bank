@@ -30,41 +30,28 @@ public class MemberService {
 	
 	//ADD
 	
-	public int join(MemberDTO memberDTO, MultipartFile[] files) throws Exception {
+	public int join(MemberDTO memberDTO, MultipartFile avatar) throws Exception {
+		int result=0;
+		result = memberDAO.join(memberDTO);
 		
-		 int result = memberDAO.join(memberDTO);
-		 
-		 return this.fileAdd(memberDTO, files);
+		if(avatar.isEmpty()) {
+			return result;
+		}
+		String path = servletContext.getRealPath("/resources/upload/member");
 		
-		
-	}
-	
-	//flieAdd
-	public  int fileAdd(MemberDTO memberDTO, MultipartFile[] files) throws Exception {
-		
-		int result = 0;
-		
-		String path = "/resources/upload/memberFiles";
-		
-		for(MultipartFile f : files) {			
-			
-			if(f.isEmpty()) {
-				continue;
-			}			
-		
-		String fileName = fileManager.fileSave(path, f); 
+		String fileName = fileManager.fileSave(path, avatar);
 		
 		AvatarDTO avatarDTO = new AvatarDTO();
-		
 		avatarDTO.setFileName(fileName);
-		avatarDTO.setOrigName(f.getOriginalFilename());
+		avatarDTO.setOrigName(avatar.getOriginalFilename());
 		avatarDTO.setUserName(memberDTO.getUserName());
-		result = memberDAO.setFileAdd(avatarDTO);		
 		
-		}
+		result = memberDAO.setFileAdd(avatarDTO);
+		
 		return result;
 		
 	}
+	
 
 	
 	
