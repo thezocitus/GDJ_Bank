@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.winter.app.account.AccountDAO">
+ 
+ 
+ <!-- insert -->
+ 
+ <insert id="addAccount" parameterType="AccountDTO">
+ 
+ 	INSERT INTO ACCOUNT 
+ 	(ACCOUNTNUM,USERNAME,PRODUCTNUM,ACCOUNTPW,ACCOUNTDASTE,ACCOUNTBALANCE)
+ 	VALUES(#{accountNum},#{userName},#{productNum},#{accountPw},SYSDATE,0) 	
+ 
+ </insert>
+
+<!-- LIST --> 
+ <select id="getList" parameterType="pager" resultType="AccountDTO">
+ 
+	 SELECT  * FROM
+	(SELECT ROWNUM R, A.* FROM
+	(SELECT * FROM ACCOUNT WHERE USERNAME = #{s1} ORDER BY ACCOUNTDASTE DESC) A)
+	WHERE R BETWEEN  #{startRow} AND #{lastRow}
+ 
+ </select>
+ 
+ <select id="getTotal" resultType="Long" parameterType="AcountDTO">
+ 
+ SELECT COUNT(USERNAME) FROM ACCOUNT WHERE USERNAME = #{userName}; 
+ 
+ </select>
+
+ 
+ 
+ 
+ </mapper>

@@ -108,7 +108,7 @@ public class MemberController {
 		MemberDTO mem =(MemberDTO)session.getAttribute("member");		
 		mem = memberService.getDetail(mem);
 		model.addAttribute("member", mem);
-		
+		System.out.println(mem.getAvatarDTO().getFileName()+"12312");
 		return "member/mypage";
 		
 	}

@@ -1,5 +1,6 @@
 package com.winter.app.product;
 
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -50,11 +51,14 @@ public class ProductService {
 		int result = productDAO.add(productDTO);
 		//1. 어디에 저장할 것 인가??
 		
+		
+		if(file==null || file.length==0) {
+			return result;
+		}
+		
 		String path = servletContext.getRealPath("/resources/upload/products");
 
 		System.out.println(path + "  :  service.add");
-		
-			
 		
 		
 		//4. DB에 정보 저장

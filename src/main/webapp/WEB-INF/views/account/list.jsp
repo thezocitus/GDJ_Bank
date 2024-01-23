@@ -25,12 +25,10 @@
 			<table class="table table-hover">
 			<thead>
 				<tr class="table-dark">
-					<th>No</th>
-					<th>Title</th>
-					<th>Rate</th>
-					<th>Contents</th>
-					<th>Count</th>
-					<th>Jumsu</th>
+					<th>번호</th>
+					<th>제품명</th>
+					<th>이율</th>
+					<th>잔고</th>					
 				</tr>
 			</thead>
 			<tbody>
@@ -40,42 +38,22 @@
 					</tr>
 				</c:if>
 				<c:forEach items="${list}" var="dto">
-					<c:set var="f" value="0"></c:set>
-					<c:catch>
-						<c:set var="f" value="${dto.productSale}"></c:set>
-						<c:if test="${f==0}">
-							<tr>
-								<td>${dto.productNum}</td>
-								<td>삭제됨</td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</c:if>
-					</c:catch>
-					<c:if test="${f==1}">
+					<c:set var="f" value="0"></c:set>					
+					
 						<tr>
-							<td>${dto.productNum}</td>
-
-							<td><a href="./detail?productNum=${dto.productNum}"> ${dto.productName}
+							<td>${dto.accountNum}</td>
+							<td><a href="./detail?productNum=${dto.accountNum}"> accountDate
 							</a></td>
-							<td>${dto.productRate}</td>
-							<td>${dto.productContents}</td>
-							<td>${dto.productRate}</td>
-							<td>${dto.productJumsu}</td>
-						</tr>
-					</c:if>
-				</c:forEach>
-			</tbody>
-		</table>
-                
-                
-                <div>
-                	<a href="add" class="btn btn-danger">상품등록</a>
-                </div>		
-			</div>
-			
-		
+							<td>3</td>
+							<td>${dto.accountBlance}</td>
+							
+							</tr>
+						
+					</c:forEach>
+				</tbody>
+			</table>	                
+                	
+			</div>		
 			
         </main>
         <!-- Footer-->

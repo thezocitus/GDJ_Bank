@@ -40,6 +40,11 @@ public class FileManager {
 		f = new File(f, fileName);
 		FileCopyUtils.copy(file.getBytes(),f);		
 	
+		//b. MultipartFile의 transferTo 메서드 사용
+		//file.transferTo(f);
+				
+		
+		
 		return fileName;
 		
 	}

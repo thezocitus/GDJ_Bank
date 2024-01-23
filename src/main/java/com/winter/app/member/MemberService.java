@@ -37,6 +37,7 @@ public class MemberService {
 		if(avatar.isEmpty()) {
 			return result;
 		}
+		System.out.println(avatar.getName());
 		String path = servletContext.getRealPath("/resources/upload/member");
 		
 		String fileName = fileManager.fileSave(path, avatar);

@@ -38,15 +38,15 @@
                                     
                                     <!-- Watch a tutorial on how to do this on YouTube (link)-->
                                     
-                                    <c:if test="${member==null}">
+                                    <c:if test="${empty member}">
                                     <img class="profile-img" src="/resources/assets/dog.png" alt="..." />
 									</c:if>
-									<c:if test="${member!=null}">
-                                    	 <c:if test="${mem.AvatarDTO.fileName == null}">
+									<c:if test="${not empty member}}">
+                                    	 <c:if test="${member.avatarDTO.fileName} == null}">
 	                          			<img src="/resources/assets/Pablobg.png" class="rounded mx-auto d-block" alt="...">
 	                           			</c:if>
-				                          <c:if test="${mem.AvatarDTO.fileName != null}">
-				                          <img src="/resources/upload/memberFiles/${mem.AvatarDTO.fileName}" class="rounded mx-auto d-block" alt="...">
+				                          <c:if test="${member.avatarDTO.fileName} != ''}">				                        
+				                          <img  src="/resources/upload/member/${member.avatarDTO.fileName}" class="rounded mx-auto d-block" alt="...">
 				                          </c:if>
 									</c:if>                                    
                                     

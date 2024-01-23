@@ -22,6 +22,11 @@ public class Pager {
 	private String search;
 	private String kind;
 	
+	//임시변수
+	
+	private String s1;
+	private Long l1;
+	
 	public void makeRow() {
 		
 		this.startRow = this.getPage()*this.getPerPage()-(this.getPerPage()-1);
@@ -174,6 +179,22 @@ public class Pager {
 
 	public void setKind(String kind) {
 		this.kind = kind;
+	}
+
+	public String getS1() {
+		return s1;
+	}
+
+	public void setS1(String s1) {
+		this.s1 = s1;
+	}
+
+	public Long getL1() {
+		return l1;
+	}
+
+	public void setL1(Long l1) {
+		this.l1 = l1;
 	}
 	
 			
