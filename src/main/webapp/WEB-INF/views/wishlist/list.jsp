@@ -49,7 +49,8 @@
 
 
 			<table class="table table-hover">
-			<button type="button" id="del" >삭제</button>
+			<button type="button" id="del" >삭제</button>			
+			<button type="button" id="add" >가입</button>
 			<thead>
 				<tr class="table-dark">
 					<th><input type="checkbox" id="checkAll">전체선택</th>
@@ -59,23 +60,24 @@
 					<th>Rate</th>				
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="ajaxList">
 				<c:if test="${list.size()==0 }">
 					<tr>
 						<td colspan="5">없음.</td>
 					</tr>
 				</c:if>
+				<form id="deleteForm">
 				<c:forEach items="${list}" var="dto">					
 						<tr>
-							<td><input type="checkbox" class="checks" value="${dto.productNum}"></td>
+							<td><input type="checkbox" class="checks" name="productNum" value="${dto.productNum}"></td>
 							<td>${dto.productNum}</td>
 							<td><a href="/product/detail?productNum=${dto.productNum}"> ${dto.productName}
 							</a></td>
 							<td>${dto.productContents}</td>
-							<td>${dto.productRate}</td>
-							
+							<td>${dto.productRate}</td>							
 						</tr>					
 				</c:forEach>
+				</form>
 			</tbody>
 		</table>
       </div>
@@ -112,7 +114,7 @@
         <!-- Footer-->
         <!-- 사용전 경로를 꼭 수정 하세요 -->
         <c:import url="../temps/footer.jsp"></c:import>
-		<script src="/resources/js/member/agreement.js"></script>
+		<script src="/resources/js/member/wishlist.js"></script>
 
     </body>
 </html>

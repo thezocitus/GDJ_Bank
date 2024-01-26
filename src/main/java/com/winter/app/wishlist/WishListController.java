@@ -49,9 +49,9 @@ public class WishListController {
 	}
 	
 	@GetMapping("list")
-	public void getList(MemberDTO memberDTO, HttpSession session, Model model, Pager pager) {
+	public void getList(HttpSession session, Model model, Pager pager) {
 		
-		memberDTO = (MemberDTO)session.getAttribute("member");
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		List<ProductDTO> ar = wishListService.getList(pager,memberDTO);
 		System.out.println(ar.size());
 		model.addAttribute("list", ar);
@@ -59,15 +59,20 @@ public class WishListController {
 	}
 	
 	@PostMapping("delete")
-	public String setDelete(Long [] productNum, HttpSession session, Model model) {
+	public String setDelete(Long [] productNum, HttpSession session, Model model,Pager pager) {
 		MemberDTO memberDTO =(MemberDTO)session.getAttribute("member");
 		
 		int result = wishListService.setDelete(productNum, memberDTO);
-	
 		
-		model.addAttribute("result", result);
+		//다시조회
+		List<ProductDTO> ar = wishListService.getList(pager,memberDTO);
 		
-		return "commons/ajaxResult";
+//		model.addAttribute("result", result);
+		model.addAttribute("list", ar);
+		
+		return "wishlist/ajaxList";
 	}
+	
+	
 	
 }

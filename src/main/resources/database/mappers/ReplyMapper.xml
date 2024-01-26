@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.winter.app.product.ReplyDAO">
+ 
+ 
+ <insert id="setReply" parameterType="ReplyDTO">
+ 
+	 INSERT INTO REPLY (USERNAME,PRODUCTNUM, REPLYNUM,REPLYCONTENTS,REPLYDATE,REPLYJUMSU)
+	 VALUES (#{userName}, #{productNum}, REPLY_SEQ.NEXTVAL, #{replyContents}, SYSDATE, #{replyJumsu}) 
+ 
+ </insert>
+ 
+ <select id="getList" parameterType="Map" resultType="ReplyDTO">
+ 	SELECT * FROM
+ 	(SELECT ROWNUM R, RE.* FROM
+ 	(SELECT * FROM REPLY 
+ 	WHERE PRODUCTNUM = #{productDTO.productNum}
+ 	ORDER BY REPLYNUM DESC) RE)
+ 	WHERE R BETWEEN #{pager.startRow} and #{pager.lastRow}
+ </select>
+ 
+ <select id="getTotalCount" parameterType="productDTO" resultType="Long">
+
+	SELECT COUNT(PRODUCTNUM) FROM REPLY WHERE PRODUCTNUM = #{productNum}
+ 
+ </select>
+ 
+ 
+ </mapper>

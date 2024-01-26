@@ -30,7 +30,7 @@
                             <div class="col-lg-8 col-xl-6">                             
                                 <form id="addForm" action="" method="post" enctype="multipart/foam-data" >
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="productNum" name="productNum" type="hidden" value="${dto.productNum}" />
+                                        <input class="form-control" id="productNum" name="productNum" type="hidden" value="${dto.productNum}" />   
                                      
                                                                         
                                     <!-- 상품명 input-->
@@ -89,11 +89,65 @@
 				                </div>	
                             </div>
                         </div>
+                        
+                        <!--reply  -->
+                        <form id=replyList>
+                        <table class="table table-hover">
+								<thead>
+									<tr class="table-dark">																			
+										<th>Date</th>
+										<th>Writer</th>
+										<th>Contents</th>
+										<th>replyJumsu</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${replyList.size()==0 }">
+										<tr>
+											<td colspan="5">없음.</td>
+										</tr>
+									</c:if>
+									<c:forEach items="${replyList}" var="r">					
+										
+											<tr>																							
+												<td>${r.replyDate}</td>
+												<td>${r.userName}</td>
+												<td>${r.replyContents}</td>
+												<td>${r.replyJumsu}</td>
+											</tr>
+									
+									</c:forEach>
+								</tbody>
+							</table>
+                        </form>
+                        
+                        
+                        
+                    <form name="formReply">
+                        <input class="form-control" name="productNum" type="hidden" value="${dto.productNum}" />
+                        <div class="mb-3">
+                            <label for="replyContents" class="form-label">Example textarea</label>
+                            <textarea class="form-control" name="replyContents" id="replyContents" rows="3"></textarea>
+                        </div>
+                        <div class="my=3">
+                          <select class="form-select" id="replyJumsu" name="replyJumsu" aria-label="Default select example">
+                            <option selected>점수</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                          </select>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary" id="replyAddBtn">댓글달기</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </section>       
         </main> 
-        <script src="/resources/js/member/wishlist.js"></script>
+        <script src="/resources/js/commons/product/productDetail.js"></script>
         <c:import url="../temps/footer.jsp"></c:import>
     </body>
 </html>

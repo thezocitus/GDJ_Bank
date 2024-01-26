@@ -17,6 +17,10 @@
 	  		<typeAlias type="com.winter.app.account.AccountDTO" alias="AccountDTO"/>
 	  		<typeAlias type="com.winter.app.account.AccountDAO" alias="AccountDAO"/>
 	  		<typeAlias type="com.winter.app.wishlist.WishListDAO" alias="WishListDAO"/>
+	  		<typeAlias type="com.winter.app.product.ReplyDAO" alias="ReplyDAO"/>
+	  		<typeAlias type="com.winter.app.product.ReplyDTO" alias="ReplyDTO"/>
+	  		
+	  		
 	  		
 	  		<typeAlias type="java.lang.Long" alias="Long"/>
 	  		<typeAlias type="java.util.List" alias="List"/>

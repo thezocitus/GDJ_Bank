@@ -56,6 +56,11 @@ public class WishListDAO {
 		
 	}
 	
+	public Long getTotalCount(ProductDTO productDTO) {
+		
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount", productDTO);
+	}
+	
 	
 	
 	

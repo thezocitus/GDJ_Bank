@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,12 +19,14 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Pager pager, Model model) throws Exception{
 		 List<ProductDTO> ar = productService.getList(pager);
 		 model.addAttribute("list",ar);	 
-		 
+			
 	}
 	
 	@RequestMapping(value = "add")
@@ -33,11 +36,15 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "detail")
-	public String getDetail(ProductDTO productDTO, Model model){
-		
+	public String getDetail(ProductDTO productDTO, Model model) throws Exception{
+		System.out.println(productDTO.getProductNum());
+//		List<ReplyDTO> arReply = replyService.getList(productDTO);
 		productDTO = productService.detail(productDTO);
 		
 		model.addAttribute("dto",productDTO);
+//		model.addAttribute("replyList", arReply);
+		
+		
 		
 		return "product/detail";
 	}
@@ -63,5 +70,7 @@ public class ProductController {
 		
 		
 	}
+	
+	
 	
 }

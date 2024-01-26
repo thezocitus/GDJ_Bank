@@ -17,6 +17,10 @@
                 <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Board Reply</span></h1>
             </div>
 				
+				
+				
+				
+				
 			<!-- boardForm import -->
 			<c:import url="../temps/boardForm.jsp"/>
  			
