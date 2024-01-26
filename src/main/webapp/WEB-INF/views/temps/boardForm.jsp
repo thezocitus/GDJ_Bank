@@ -18,17 +18,17 @@
 					  <textarea class="form-control" id="contents"   name=boardContents rows="3">${boardDTO.boardContents}</textarea>
 					</div>
 										
-					<div class="mb-3">
-						<input type="file" name="attachs">
-						<input type="file" name="attachs">
-						<input type="file" name="attachs">						
+					<div class="mb-3" id="filelist" data-file-count="0" data-file-max="5">
+					
 					</div>
+					<button type="button" class="btn btn-primary" id="fileAdd">파일추가</button>										
 					
 					<div>
-						<button class="btn btn-primary">등록</button>
+						<button type="submit" class="btn btn-primary" >등록</button>
+						
 					</div>
                	</form>
-              
+              			
                 </div>
             </div> 
  			

@@ -22,6 +22,7 @@
         </main> 
         <c:import url="../temps/footer.jsp"/>
        
+        <script src="../resources/js/commons/fileManager.js"></script>
        <script type="text/javascript">
         $("#contents").summernote();
        </script>

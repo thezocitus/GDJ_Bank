@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.winter.app.wishlist.WishListDAO">
+ 
+ <insert id="addWishList" parameterType="AccountDTO">
+ 
+ INSERT INTO WISHLIST (PRODUCTNUM,USERNAME)
+VALUES(#{productNum}, #{userName})
+ </insert>
+ 
+ 
+<!--  <select id="getList" parameterType="MemberDTO" resultType="ProductDTO">
+ 
+ SELECT * FROM PRODUCT 
+		LEFT JOIN WISHLIST 
+		USING (PRODUCTNUM)
+WHERE USERNAME = #{userName} 
+ 
+ </select> -->
+<select id="getTotalCount" parameterType="MemberDTO" resultType="Long">
+ 
+ SELECT COUNT(PRODUCTNUM) FROM PRODUCT 
+		LEFT JOIN WISHLIST 
+		USING (PRODUCTNUM)
+WHERE USERNAME = #{userName} 
+ 
+ </select> 
+ 
+ <select id="getList" parameterType="map" resultType="ProductDTO">
+ SELECT * FROM 
+ 	(SELECT ROWNUM R, PW.* FROM
+		(SELECT * FROM PRODUCT 
+			LEFT JOIN WISHLIST 
+			USING (PRODUCTNUM)
+			WHERE USERNAME = #{memberDTO.userName})PW
+		)PR
+WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+ 
+ 
+ </select>
+ 
+ 
+ <!-- Delete -->
+<!--  
+ <delete id="setDelete" parameterType="map">
+ 
+ DELETE WISHLIST WHERE PRODUCTNUM = #{accountDTO.productNum} AND USERNAME = #{accountDTO.userName}
+ 
+ </delete>
+ --> 
+  <delete id="setDelete" parameterType="map">
+ 
+ DELETE WISHLIST 
+ WHERE 
+ <!-- PRODUCTNUM(2,3,4,5) -->
+ PRODUCTNUM IN
+ <foreach collection="nums" item="n" open="(" separator="," close=")">
+ 	#{n}
+ </foreach> 
+  AND USERNAME = #{memberDTO.userName}
+ 
+ </delete>
+ 
+ 
+ </mapper>

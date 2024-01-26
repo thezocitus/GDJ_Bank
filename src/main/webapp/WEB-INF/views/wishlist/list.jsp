@@ -18,19 +18,45 @@
             <!-- 사용전 경로를 꼭 수정 하세요 -->
 			<c:import url="../temps/header.jsp"></c:import>
 			
+			
 			<div class="container px-5 my-5">
-	        	<div class="text-center mb-5">
-                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Product List</span></h1>
-                </div>
+				<div class="text-center mb-5">
+					<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Wish List</span></h1>
+				</div>
+			<div class="container px-5 mt-5">
+				<div class="row g-4 align-items-end">
+					<form class="col row g-3 mb-3">
+						<div class="col-auto">
+							<select class="form-select" name="kind">
+								<option value="kind1">이름</option>
+								<option value="kind2">내용</option>
+								<option value="kind3">이름&내용</option>
+							</select>
+						</div>
+						<div class="col-auto">
+							<label for="search" class="visually-hidden">Search</label> <input
+								type="text" name="search" class="form-control" id="search" value="${pager.search}">
+						</div>
+						<div class="col-auto">
+							<button type="submit" class="btn btn-light">Search</button>
+						</div>
+					</form>
+					<div class="col-auto d-flex justify-content-end">
+						<a class="btn btn-light mb-3" href="./add">상품 등록</a>
+					</div>
+				</div>
+			</div>
+
+
 			<table class="table table-hover">
+			<button type="button" id="del" >삭제</button>
 			<thead>
 				<tr class="table-dark">
+					<th><input type="checkbox" id="checkAll">전체선택</th>
 					<th>No</th>
-					<th>Title</th>
-					<th>Rate</th>
+					<th>Title</th>					
 					<th>Contents</th>
-					<th>Count</th>
-					<th>Jumsu</th>
+					<th>Rate</th>				
 				</tr>
 			</thead>
 			<tbody>
@@ -39,41 +65,24 @@
 						<td colspan="5">없음.</td>
 					</tr>
 				</c:if>
-				<c:forEach items="${list}" var="dto">
-					<c:set var="f" value="0"></c:set>
-					<c:catch>
-						<c:set var="f" value="${dto.productSale}"></c:set>
-						<c:if test="${f==0}">
-							<tr>
-								<td>${dto.productNum}</td>
-								<td>삭제됨</td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</c:if>
-					</c:catch>
-					<c:if test="${f==1}">
+				<c:forEach items="${list}" var="dto">					
 						<tr>
+							<td><input type="checkbox" class="checks" value="${dto.productNum}"></td>
 							<td>${dto.productNum}</td>
-
-							<td><a href="./detail?productNum=${dto.productNum}"> ${dto.productName}
+							<td><a href="/product/detail?productNum=${dto.productNum}"> ${dto.productName}
 							</a></td>
-							<td>${dto.productRate}</td>
 							<td>${dto.productContents}</td>
 							<td>${dto.productRate}</td>
-							<td>${dto.productJumsu}</td>
-						</tr>
-					</c:if>
+							
+						</tr>					
 				</c:forEach>
 			</tbody>
 		</table>
-      
+      </div>
                 
-                <div>
+              <!--   <div>
                 	<a href="add" class="btn btn-danger">상품등록</a>
-                </div>		
-			</div>
+                </div>		 -->
 			<nav aria-label="Page navigation example" class="d-flex justify-content-center">
 				<ul class="pagination">
 					<c:if test="${!pager.start}">
@@ -103,6 +112,7 @@
         <!-- Footer-->
         <!-- 사용전 경로를 꼭 수정 하세요 -->
         <c:import url="../temps/footer.jsp"></c:import>
+		<script src="/resources/js/member/agreement.js"></script>
 
     </body>
 </html>

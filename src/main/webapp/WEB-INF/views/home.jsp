@@ -25,6 +25,12 @@
                                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
                                         <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="resume.html">Resume</a>
                                         <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="projects.html">Projects</a>
+                                        <button id="btn">NOTICELIST</button>
+                                        <div id="result"> 
+                                            <input type="text" id="title">
+                                            <textarea id="contents"></textarea>
+                                            <button id="btn2">공지사항 추가</button>                                            
+                                        </div>
                                     </div>
                                 </c:if>
                             </div>
@@ -41,11 +47,11 @@
                                     <c:if test="${empty member}">
                                     <img class="profile-img" src="/resources/assets/dog.png" alt="..." />
 									</c:if>
-									<c:if test="${not empty member}}">
-                                    	 <c:if test="${member.avatarDTO.fileName} == null}">
+									<c:if test="${not empty member}">
+                                    	 <c:if test="${member.avatarDTO.fileName == null}">
 	                          			<img src="/resources/assets/Pablobg.png" class="rounded mx-auto d-block" alt="...">
 	                           			</c:if>
-				                          <c:if test="${member.avatarDTO.fileName} != ''}">				                        
+				                          <c:if test="${not empty member.avatarDTO.fileName}">				                        
 				                          <img  src="/resources/upload/member/${member.avatarDTO.fileName}" class="rounded mx-auto d-block" alt="...">
 				                          </c:if>
 									</c:if>                                    
@@ -189,5 +195,6 @@
             </section>
         </main> 
         <c:import url="temps/footer.jsp"></c:import>
+        <script src="/resources/js/basic.js"></script>
     </body>
 </html>

@@ -29,30 +29,35 @@
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">                             
                                 <form id="addForm" action="" method="post" enctype="multipart/foam-data" >
-                                    <!-- 상품명 input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="productName" name="productName" type="text" placeholder="상품명을 입력하세요" />
+                                        <input class="form-control" id="productNum" name="productNum" type="hidden" value="${dto.productNum}" />
+                                     
+                                                                        
+                                    <!-- 상품명 input-->
+                                    
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="productName" name="productName" type="text" placeholder="상품명을 입력하세요" readonly />
                                         <label for="productName">${dto.productName}</label>
                                         
                                     </div>                                  
                                   
                                        <!-- 이자율  input-->
                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="productRate" type="text" placeholder="이자율" />
+                                        <input class="form-control" id="rate" name="productRate" type="text" placeholder="이자율" readonly/>
                                         <label for="rate">${dto.productRate}</label>
                                       
                                     </div> 
                                      <!-- 점수  input-->
                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="productJumsu" type="text" placeholder="이자율" />
+                                        <input class="form-control" id="rate" name="productJumsu" type="text" placeholder="이자율" readonly/>
                                         <label for="rate">${productJumsu}</label>
                                        
                                     </div>                                 
                                     <!-- detail input-->
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="productContents" name="productContents" type="text" placeholder="상품 상세 설명" style="height: 10rem"></textarea>
+                                        <textarea class="form-control" id="productContents" name="productContents" type="text" placeholder="상품 상세 설명" style="height: 10rem" readonly></textarea>
                                         <label for="productContents">${productContents}</label>
-                                        <
+                                        
                                     </div>  
                                         <!-- 이자율  input-->                                  
                                     
@@ -78,13 +83,17 @@
                                      
 				                <div>
 				                	<a href="/account/add?productNum=${dto.productNum}" class="btn btn-danger">계좌개설</a>
-				                </div>		
+				                </div>	
+				                <div>
+				                	<button type="button" id="add">관심상품</button>
+				                </div>	
                             </div>
                         </div>
                     </div>
                 </div>
             </section>       
         </main> 
+        <script src="/resources/js/member/wishlist.js"></script>
         <c:import url="../temps/footer.jsp"></c:import>
     </body>
 </html>

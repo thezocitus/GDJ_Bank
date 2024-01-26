@@ -8,7 +8,7 @@
  
  <!-- insert -->
  
- <insert id="addAccount" parameterType="AccountDTO">
+ <insert id="addAccount" parameterType="AccountDTO" >
  
  	INSERT INTO ACCOUNT 
  	(ACCOUNTNUM,USERNAME,PRODUCTNUM,ACCOUNTPW,ACCOUNTDASTE,ACCOUNTBALANCE)
@@ -17,16 +17,54 @@
  </insert>
 
 <!-- LIST --> 
- <select id="getList" parameterType="pager" resultType="AccountDTO">
+<!--  <select id="getList" parameterType="AccountDTO" resultType="AccountDTO">
  
 	 SELECT  * FROM
 	(SELECT ROWNUM R, A.* FROM
-	(SELECT * FROM ACCOUNT WHERE USERNAME = #{s1} ORDER BY ACCOUNTDASTE DESC) A)
+	(SELECT * FROM ACCOUNT WHERE USERNAME = #{userName} ORDER BY ACCOUNTDASTE DESC) A)
 	WHERE R BETWEEN  #{startRow} AND #{lastRow}
  
  </select>
+  -->
  
- <select id="getTotal" resultType="Long" parameterType="AcountDTO">
+ <resultMap type="AccountDTO" id="getListResult">
+	 <id column="ACCOUNTNUM" property="accountNum"/>
+	 <result column="USERNAME" property="userName"/>
+	 <result column="ACCOUNTPW" property="accountPw"/>	
+	 <result column="ACCOUNTDASTE" property="accountDate"/>
+	 <result column="ACCOUNTBALANCE" property="accountBlance"/> 
+	 <result column="PRODUCTNUM" property="productNum"/>  	
+	 
+ <association property="productDTO" javaType="ProductDTO">
+ 
+ 	<result column="PRODUCTNUM" property="productNum"/>
+ 	<result column="PRODUCTNAME" property="productName"/>
+ 	<result column="PRODUCTCONTENTS" property="productContents"/>
+ 	<result column="PRODUCTRATE" property="productRate"/>
+ 	<result column="PRODUCTJUMSU" property="productJumsu"/>  
+ 	  
+ </association>  
+ </resultMap>
+ 
+ 
+ <select id="getList" parameterType="map" resultMap="getListResult">
+
+	SELECT * FROM
+	(SELECT ROWNUM R, PA.* FROM
+		(SELECT * FROM PRODUCT p 
+			LEFT JOIN ACCOUNT a 
+			USING (PRODUCTNUM)
+			WHERE USERNAME = #{accountDTO.userName})PA
+	)
+	WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+ 
+ 
+ </select>
+ 
+ 
+ 
+ 
+ <select id="getTotal" resultType="Long" parameterType="AccountDTO">
  
  SELECT COUNT(USERNAME) FROM ACCOUNT WHERE USERNAME = #{userName}; 
  

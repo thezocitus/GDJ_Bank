@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.winter.app.board.BoardDTO;
+
 import com.winter.app.member.MemberDTO;
 import com.winter.app.product.ProductDTO;
 import com.winter.app.product.ProductService;
@@ -31,11 +31,11 @@ public class AccountController {
 	
 	
 	@GetMapping("list")
-	public void getList(AccountDTO accountDTO, Model model, HttpSession session) {
+	public void getList(AccountDTO accountDTO, Model model, HttpSession session, Pager pager) throws Exception {
 	
 	MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-	accountDTO.setUserName(memberDTO.getUserName());	
-	List<AccountDTO> ar = accountService.getList(accountDTO);
+	accountDTO.setUserName(memberDTO.getUserName());
+	List<AccountDTO> ar = accountService.getList(pager, accountDTO);
 	
 	model.addAttribute("list", ar);
 	
@@ -53,11 +53,10 @@ public class AccountController {
 	@PostMapping("add")
 	public String addAccount(AccountDTO accountDTO, ProductDTO productDTO, HttpSession session, Model model) {
 				
-		productDTO = productService.detail(productDTO);
-		accountDTO.setProductNum(productDTO.getProductNum());		
+		productDTO = productService.detail(productDTO);			
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		accountDTO.setUserName(memberDTO.getUserName());
-		
+		accountDTO.setProductDTO(productDTO);
 		int result = accountService.addAccount(accountDTO);
 					
 		String msg = "계좌개설에 실패하였습니다.";

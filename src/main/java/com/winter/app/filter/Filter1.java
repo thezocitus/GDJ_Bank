@@ -40,10 +40,10 @@ public class Filter1 implements Filter {
 		
 		//Servlet 진입 전 실행 
 		
-		System.out.println("Servlet 진입 전 : filter1");
+//		System.out.println("Servlet 진입 전 : filter1");
 		chain.doFilter(request, response);	
 		//Servlet 진입 후 실행
-		System.out.println("Servlet 진입 후 : filter1");
+//		System.out.println("Servlet 진입 후 : filter1");
 		
 		
 	}

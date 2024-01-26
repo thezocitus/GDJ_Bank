@@ -1,9 +1,14 @@
 package com.winter.app.account;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.winter.app.member.MemberDTO;
+import com.winter.app.util.Pager;
 
 @Service
 public class AccountService {
@@ -23,13 +28,16 @@ public class AccountService {
 	}
 	
 	
-	public List<AccountDTO> getList(AccountDTO accountDTO) {
+	public List<AccountDTO> getList(Pager pager,AccountDTO accountDTO) throws Exception{
 		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<AccountDTO> ar = accountDAO.getList(accountDTO);		
+		pager.makeRow();
+		map.put("pager", pager);
+		map.put("accountDTO", accountDTO);			
+//		pager.makeNum(totalCount);
 		
-		
-		return ar;
+		return accountDAO.getList(map);
 		
 	}
 	

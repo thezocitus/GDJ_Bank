@@ -35,14 +35,14 @@
                                 <form id="addForm" action="login" method="post" enctype="multipart/form-data">
                                  <!-- username : id  -->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" name="userName" type="text" placeholder="아이디를 입력하세요" />
+                                        <input class="form-control" id="userName" name="userName" type="text" value="a" placeholder="아이디를 입력하세요" />
                                         <label for="userName">아이디를 입력하세요</label>
                                         <div class="invalid-feedback" data-sb-feedback="productName:required">아이디를 입력하세요</div>
                                     </div>                                  
                                   
                                        <!-- password  input-->
                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="rate" name="password" type="password" placeholder="password" />
+                                        <input class="form-control" id="rate" name="password" type="password" value="a" placeholder="password" />
                                         <label for="password">비밀번호</label>
                                         <div class="invalid-feedback"data-sb-feedback="password:required" >password</div>
                                     </div> 

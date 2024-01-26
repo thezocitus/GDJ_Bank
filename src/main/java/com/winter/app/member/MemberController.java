@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.winter.app.account.AccountDTO;
+
 import oracle.jdbc.proxy.annotation.Post;
 
 
@@ -24,6 +26,24 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
+	
+	
+	
+	
+	
+	@GetMapping("idCheck")
+	public String getIdCheck(MemberDTO memberDTO, Model model) throws Exception {
+	 	memberDTO = memberService.getDetail(memberDTO);	 
+	 
+	 	int result=0;
+	 	if(memberDTO == null) {
+	 		result = 1;
+	 	}
+	 	
+	 	model.addAttribute("result", result);
+	 	
+		return "commons/ajaxResult";
+	}
 	
 	
 	//Join
@@ -45,7 +65,7 @@ public class MemberController {
 		}
 		
 		model.addAttribute("msg",msg);
-		model.addAttribute("path","./list");
+		model.addAttribute("path","/");
 		
 		
 		return "commons/result";

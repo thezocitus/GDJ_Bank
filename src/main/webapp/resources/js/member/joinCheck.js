@@ -5,15 +5,28 @@ const pwCheck = document.getElementById("passwordCheck");
 const passwordResult = document.getElementById("passwordResult");
 const passwordCheckResult = document.getElementById("passwordCheckResult");
 const submitBtn = document.getElementById("submitButton");
-const userName = document.getElementsByName("name");
-const userId = document.getElementsByName("userName");
-const email = document.getElementsByName("email");
-const phone = document.getElementsByName("phone");
-const address = document.getElementsByName("address");
+const idResult = document.getElementById("idResult");
+
+const uName = document.getElementById("name");
+const userId = document.getElementById("userName");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
+const address = document.getElementById("address");
 
 
 let p1=false; // password check
 let p2=false; // passwordCheck check
+
+userId.addEventListener('blur', function(){
+    console.log("blur")
+    fetch("./idCheck?userName="+userId.value , {
+        method:"GET"})
+        
+    .then(response=>response.text())
+    .then(response=>console.log(response.trim()))
+    
+    
+});
 
 
 pw.addEventListener('keyup',function(){
@@ -33,7 +46,7 @@ pw.addEventListener('keyup',function(){
 
 pwCheck.addEventListener('blur',function(){
     
-    check = pwCheck.value;
+    let check = pwCheck.value;
     if(check!=pw.value){
         passwordCheckResult.innerHTML="비밀번호가 일치 하지 않습니다.";
         p2=false;
@@ -47,21 +60,28 @@ pwCheck.addEventListener('blur',function(){
 
 
 
-submitBtn.addEventListener('click',function(e){
-    e.preventDefault();
+// submitBtn.addEventListener('click',function(e){
+//     e.preventDefault();
 
-    if(p1&&p2){
-        console.log('OK');
-    }else{
-        console.log('GG');
-        e.preventDefault();
-    }
+//     if(p1&&p2){
+//         console.log('OK');
+//     }else{
+//         console.log('GG');
+//         e.preventDefault();
+//     }
     
-    if(email.value==null){
-        alert("이메일을 입력하세요")
-    }
+//     if(email.value==null){
+//         alert("이메일을 입력하세요")
+//     }
+//     if(userId.value==null || idResult==0){
+//         alert("아이디를 확인하세요")
+//     }
 
-})
+// })
+
+
+
+
 
 
 
@@ -98,6 +118,30 @@ submitBtn.addEventListener('click',function(e){
 //         console.log(p)
 //     }
 // })
+
+
+// $('#userName').blur(function(){
+    
+    // let userName = document.getElementById("userName");
+    // $.get("idCheck?userName"+$("#userName").val(), function(response){
+    //     console.log(response);
+    // })
+    // $.ajax({
+    //     url:"./idCheck",
+    //     method:"GET",
+    //     data:{
+    //         userName:userName
+    //     },
+    //     success:function(r){
+
+    //         console.log(r)
+    //     },
+    //     error:function(){
+    //         console.log("아이디 검증 실패")
+    //     }
+    // });
+
+// });
 
 // $('#password').keyup(function(){
 //     if($('#password').val()>7){

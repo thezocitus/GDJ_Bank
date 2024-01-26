@@ -30,23 +30,26 @@
                             <div class="col-lg-8 col-xl-6">                             
                                 <form id="addForm" action="join" method="post" enctype="multipart/form-data">
                                     <!-- 상품명 input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="userName" name="userName" type="text" placeholder="userName" />
+                                        <label for="userName">ID</label>
+                                        <div id="idResult"></div>                                    
+                                    </div>                              
                                       <div class="form-floating mb-3">
                                         <input class="form-control" id="name" name="name" type="text" placeholder="name"/>
                                         <label for="name">이름</label>                                        
                                     </div>
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" name="userName" type="text" placeholder="userName" />
-                                        <label for="userName">userName</label>                                    
-                                    </div>                              
                                   
                                        <!-- password  input-->
                                    <div class="form-floating mb-3">
                                         <input class="form-control"  name="password" id="password" type="password" placeholder="password" />
-                                        <label for="password">비밀번호</label>                                                                              
+                                        <label for="password">비밀번호</label>
+                                        <div id="passwordResult"></div>                                                                              
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control"  name="passwordCheck" id="passwordCheck" type="password" placeholder="password" />
-                                        <label for="passwordCheck">비밀번호확인</label>                                                                          
+                                        <label for="passwordCheck">비밀번호확인</label> 
+                                        <div id="passwordCheckResult"></div>                                                                         
                                     </div> 
                                      <!-- 점수  input-->
                                    <div class="form-floating mb-3">

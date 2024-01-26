@@ -27,6 +27,7 @@
 					<li class="nav-item"><a class="nav-link" href="/notice/list">Notice</a></li>
 					<li class="nav-item"><a class="nav-link" href="/qna/list">QnA</a></li>
 					<c:if test="${not empty member}">
+					<li class="nav-item"><a class="nav-link" href="/wishlist/list">Wish List</a></li>
 					<li class="nav-item"><a class="nav-link" href="/account/list">My자산</a></li>
 					</c:if>
 				</ul>
