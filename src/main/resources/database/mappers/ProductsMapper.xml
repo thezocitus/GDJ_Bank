@@ -76,12 +76,27 @@
  
  <!-- List  -->
  
+ <sql id="searchs">
+  		<trim prefix="where" prefixOverrides="OR">
+	  		<if test="kind=='kind1' or kind=='kind3'">
+				PRODUCTNAME LIKE '%'||#{search}||'%'
+	  		</if>
+	  		<if test="kind=='kind2' or kind=='kind3'">
+	  			OR PRODUCTCONTENTS LIKE '%'||#{search}||'%'
+	  		</if>
+	  	</trim>		
+ </sql>
+  
+ 
  <select id="getList" resultType="ProductDTO"  parameterType="Pager">
  
- 	SELECT  * FROM 
-	(SELECT ROWNUM R, P.* FROM 
-	(SELECT * FROM PRODUCT ORDER BY PRODUCTNUM DESC) P)
-	 WHERE R BETWEEN #{startRow} AND #{lastRow}
+ 	SELECT * FROM 
+			(SELECT ROWNUM R, P.* FROM 
+				(SELECT * FROM PRODUCT
+					<include refid="searchs"></include>
+				ORDER BY PRODUCTNUM DESC)
+			 P)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	 	
  </select>
  
@@ -95,6 +110,8 @@
  <select id="getTotal" resultType="long">
  	SELECT COUNT(PRODUCTNUM) FROM PRODUCT
  </select>
+ 
+ 
  
  
  

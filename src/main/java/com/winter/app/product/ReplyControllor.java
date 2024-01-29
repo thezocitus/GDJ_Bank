@@ -1,6 +1,8 @@
 package com.winter.app.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.winter.app.member.MemberDTO;
 import com.winter.app.util.Pager;
@@ -42,12 +45,29 @@ public class ReplyControllor {
 	
 
 	@GetMapping("list")
-	public String getList(ProductDTO productDTO, Model model, Pager pager) throws Exception{
+	@ResponseBody
+	public Map<String, Object> getList(ProductDTO productDTO, Model model, Pager pager) throws Exception{
 		
 		List<ReplyDTO> ar = replyService.getList(pager,productDTO);
-		model.addAttribute("replyList", ar);
+//		model.addAttribute("replyList", ar);
+//		model.addAttribute("pager", pager);
 		
-		return "product/ajaxReply";
+//		Map<(String, Object> map = new HashMap<K, V>()
+		
+		
+//		model.addAttribute("list", ar);
+//		model.addAttribute("pager", pager);	
+		// [
+		//  {"userName":"???", "contents:???", "date":???},
+		//  {"userName":"???", "contents:???", "date":???},
+		//  {"userName":"???", "contents:???", "date":???},		//]
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("datas", ar);
+		map.put("pager", pager);
+		
+		return map;
+
 		
 	}
 	

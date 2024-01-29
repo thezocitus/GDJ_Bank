@@ -41,8 +41,15 @@ public class ProductController {
 //		List<ReplyDTO> arReply = replyService.getList(productDTO);
 		productDTO = productService.detail(productDTO);
 		
+		Pager pager = new Pager();
+		
+		List<ReplyDTO> replyList = replyService.getList(pager, productDTO);
+		
+		
 		model.addAttribute("dto",productDTO);
-//		model.addAttribute("replyList", arReply);
+		model.addAttribute("replyList", replyList);
+		
+		
 		
 		
 		
