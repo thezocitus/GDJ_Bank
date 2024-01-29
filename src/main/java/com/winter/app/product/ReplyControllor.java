@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,25 @@ public class ReplyControllor {
 	private ReplyService replyService;
 	
 	
+	public Map<String, Object> setDelete(Pager pager, ReplyDTO replyDTO, ProductDTO productDTO) throws Exception{
+		
+		replyService.setDelete(replyDTO);
+		List<ReplyDTO> arReply = replyService.getList(pager, productDTO);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pager", pager);
+		map.put("datas", arReply);
+		
+		return map;
+		
+	}
+	
+	
+	
+	
 	@PostMapping("add")
-	public String setReply(ReplyDTO replyDTO,ProductDTO productDTO, HttpSession session,Pager pager,Model model) throws Exception{
+	@ResponseBody
+	public Map<String, Object> setReply(ReplyDTO replyDTO,ProductDTO productDTO, HttpSession session,Pager pager,Model model) throws Exception{
 		MemberDTO memberDTO =(MemberDTO)session.getAttribute("member");
 		replyDTO.setUserName(memberDTO.getUserName());
 		System.out.println(memberDTO.getUserName());
@@ -36,11 +54,13 @@ public class ReplyControllor {
 		
 		
 		List<ReplyDTO> arReply = replyService.getList(pager,productDTO);
-		model.addAttribute("path","./list");
-		model.addAttribute("replyList", arReply);
+//		model.addAttribute("path","./list");
+//		model.addAttribute("replyList", arReply);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("datas", arReply);
+		map.put("pager", pager);
 		
-		
-		return "product/ajaxReply";
+		return map;
 	}
 	
 

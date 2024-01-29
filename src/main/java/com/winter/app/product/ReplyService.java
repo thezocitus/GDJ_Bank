@@ -16,6 +16,12 @@ public class ReplyService {
 	private ReplyDAO replyDAO;
 	
 	
+	public int setDelete(ReplyDTO replyDTO) {
+		
+		return replyDAO.setDelete(replyDTO);
+		
+	}
+	
 	public int setReply(ReplyDTO replyDTO) throws Exception{
 		
 		return replyDAO.setReply(replyDTO);
@@ -24,7 +30,7 @@ public class ReplyService {
 	
 	
 	public List<ReplyDTO> getList(Pager pager, ProductDTO productDTO)throws Exception{
-		pager.setPage(5L);
+		pager.setPerPage(5L);
 		pager.makeRow();
 		Map<String, Object> map = new HashMap<String, Object>();
 		pager.makeNum(replyDAO.getTotalCount(productDTO));

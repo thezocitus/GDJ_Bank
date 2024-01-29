@@ -5,6 +5,10 @@
   
  <mapper namespace="com.winter.app.product.ReplyDAO">
  
+<delete id="setDelete" parameterType="ReplyDTO">
+	DELETE REPLY WHERE REPLYNUM=#{replyNum}
+</delete>
+
  
  <insert id="setReply" parameterType="ReplyDTO">
  
