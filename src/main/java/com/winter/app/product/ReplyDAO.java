@@ -17,6 +17,13 @@ public class ReplyDAO {
 	
 	private final String NAMESPACE = "com.winter.app.product.ReplyDAO.";
 	
+	
+	
+	public int setUpdate(ReplyDTO replyDTO) {
+		
+		return sqlSession.update(NAMESPACE+"setUpdate",replyDTO);
+	}
+	
 	public int setDelete(ReplyDTO replyDTO) {
 		
 		return sqlSession.delete(NAMESPACE+"setDelete", replyDTO);

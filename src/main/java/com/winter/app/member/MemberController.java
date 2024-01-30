@@ -25,10 +25,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	
-	
-	
-	
+				
 	
 	
 	@GetMapping("idCheck")

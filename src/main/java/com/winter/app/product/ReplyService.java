@@ -16,6 +16,14 @@ public class ReplyService {
 	private ReplyDAO replyDAO;
 	
 	
+	
+	
+	public int setUpdate(ReplyDTO replyDTO) {
+		
+		return replyDAO.setUpdate(replyDTO);
+	}
+	
+	
 	public int setDelete(ReplyDTO replyDTO) {
 		
 		return replyDAO.setDelete(replyDTO);

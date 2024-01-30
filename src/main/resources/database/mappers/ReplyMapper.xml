@@ -32,5 +32,12 @@
  
  </select>
  
+ <update id="setUpdate" parameterType="ReplyDTO">
+ 
+ UPDATE REPLY SET REPLYCONTENTS=#{replyContents} WHERE REPLYNUM = #{replyNum}
+ 
+ 
+ </update>
+ 
  
  </mapper>

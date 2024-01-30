@@ -64,7 +64,8 @@ public class MemberService {
 		
 		if(m != null) {			
 			if(m.getPassword().equals(memberDTO.getPassword())) {				
-				return m;		
+				memberDTO.setRoleDTOs(m.getRoleDTOs());
+				return memberDTO;		
 			}else {
 				m = null;
 			}

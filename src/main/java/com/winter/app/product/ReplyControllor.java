@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.winter.app.member.MemberDTO;
 import com.winter.app.util.Pager;
 
 
 
-@Controller
+//@Controller
+@RestController
 @RequestMapping("/reply/*")
 public class ReplyControllor {
 	
@@ -28,6 +30,19 @@ public class ReplyControllor {
 	private ReplyService replyService;
 	
 	
+	
+	@PostMapping("update")
+	@ResponseBody
+	public int setUpdate(ReplyDTO replyDTO) throws Exception{
+		
+		System.out.println(replyDTO.getReplyContents());
+		
+		int result = replyService.setUpdate(replyDTO);
+		
+		return result;
+	}
+	
+	@PostMapping("delete")
 	public Map<String, Object> setDelete(Pager pager, ReplyDTO replyDTO, ProductDTO productDTO) throws Exception{
 		
 		replyService.setDelete(replyDTO);

@@ -9,7 +9,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>SeokHun-Project</title>
+<title>MungsLand</title>
 <!-- 사용전 경로를 꼭 수정하세요  -->
 <!-- head_css  -->
 <c:import url="../temps/head_css.jsp"></c:import>
@@ -148,12 +148,42 @@
 
 		</div>
 	</main>
+		<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary" id="replyUpdateModal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+						Launch static backdrop modal
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form method="post" id="replyUpdateForm">
+								<textarea class="form-control" name="replyContents" id="replyUpdateContents" rows="3"></textarea>
+								<input type="hidden" value="" name="replyNum" id="replyUpdateNum">
+								<input type="hidden" value="" name="userName" id="replyWriter">
+								</form>
+							</div>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" id="replyCloseButton" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="replyUpdateButton" value="check">수정</button>
+							</div>
+						</div>
+						</div>
+					</div>
 	<!-- 사용전 경로를 꼭 수정하세요  -->
 	<!-- Footer  -->
 	  <script src="/resources/js/commons/product/productDetail.js"></script>
         <c:import url="../temps/footer.jsp"></c:import>
-</body>
 </html>
+
+
+
+
 
 <%-- 
 

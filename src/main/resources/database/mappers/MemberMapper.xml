@@ -26,15 +26,25 @@
 	 
 	 </insert>
 	 
+	 <insert id="setMemberRole" parameterType="MemberDTO" >
+	 
+	 INSERT INTO MEMBER VALUES (#{userName}, (SELECT ROLENUM FROM ROLE WHERE ROLENAME ='ROLE_MEMBER'));
+	 
+	 </insert>
+	 
 	 <!-- login -->
 	 
 	 <select id="getDetail" parameterType="MemberDTO" resultMap="getDetailResult">
 	 
 		SELECT * 
-			FROM MEMBER 
-			LEFT JOIN AVATAR 
-			USING (USERNAME)
-			WHERE USERNAME = #{userName}
+			FROM MEMBER M 
+			LEFT JOIN AVATAR
+			USING (USERNAME) 
+			INNER JOIN MEMBERROLE MR 
+			USING (USERNAME) 
+			INNER JOIN ROLE R 
+			USING (ROLENUM) 
+		WHERE USERNAME = #{userName}
 	 
 	 </select>
 	 
@@ -48,10 +58,14 @@
 		 <result column="NAME" property="name"/>
 		 
 		 <association property="avatarDTO" javaType="AvatarDTO"> 
-		 <result column="FILENUM" property="fileNum"/>
-		 <result column="FILENAME" property="fileName"/>
-		 <result column="ORIGNAME" property="origName"/>
+			<result column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORIGNAME" property="origName"/>
 		 </association>
+		 <collection property="roleDTOs" javaType="List" ofType="RoleDTO">
+		 	<id column="ROLENUM" property="roleNum"/>
+		 	<result column="ROLENAME" property="roleName"/>		 
+		 </collection>
 	
 	 </resultMap>
 	 
